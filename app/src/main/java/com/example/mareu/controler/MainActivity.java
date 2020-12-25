@@ -6,15 +6,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.Toast;
 
-import com.example.mareu.MeetingDatabase;
 import com.example.mareu.R;
+import com.example.mareu.fragment.MeetingDetailsFragment;
 import com.example.mareu.fragment.MeetingListFragment;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
     private boolean isDualPane;
@@ -27,6 +22,9 @@ public class MainActivity extends AppCompatActivity {
         attachNewFragment(new MeetingListFragment(), R.id.meeting_list_fragment_container);
         setDualPane();
 
+        if (isDualPane)
+            attachNewFragment(new MeetingDetailsFragment(), R.id.meeting_details_fragment_container);
+
     }
 
     private void attachNewFragment(Fragment newFragment, int container){
@@ -38,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setDualPane(){
-        if (findViewById(R.id.add_meeting_fragment_container) != null)
+        if (findViewById(R.id.meeting_details_fragment_container) != null)
             isDualPane = true;
         else
             isDualPane = false;
