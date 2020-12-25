@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">MaReu</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="meeting_image_text">Meeting image</string>
+    <string name="subject_time_place_text">Subject - Time - Place</string>
+    <string name="email_com_text">email@gmail.com</string>
+    <string name="image_button_text">Image button</string>
+    <string name="add_button_text">Add button</string>
+</resources>
