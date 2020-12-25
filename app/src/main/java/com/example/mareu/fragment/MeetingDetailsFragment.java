@@ -46,7 +46,7 @@ public class MeetingDetailsFragment extends Fragment {
         TextView roomText = view.findViewById(R.id.room_detail_text);
         TextView timeText = view.findViewById(R.id.time_detail_text);
         TextView subjectText = view.findViewById(R.id.subject_detail_text);
-        TextView participantsEmailsText = view.findViewById(R.id.participants_emails_text);
+        TextView participantsEmailsText = view.findViewById(R.id.emails_detail_text);
 
         StringBuilder emailsText = new StringBuilder();
         List<String> emailList = meeting.getParticipantMailList();

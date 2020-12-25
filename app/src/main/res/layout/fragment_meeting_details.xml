@@ -15,8 +15,9 @@
         android:layout_marginBottom="53dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="186dp"
-        android:layout_marginEnd="186dp"
+        android:layout_marginStart="87dp"
+        android:layout_marginEnd="87dp"
+        android:gravity="center_horizontal"
         android:text="@string/meeting_text"
         android:textSize="47sp" />
 
