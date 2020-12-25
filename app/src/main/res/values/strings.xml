@@ -7,4 +7,13 @@
     <string name="email_com_text">email@gmail.com</string>
     <string name="image_button_text">Image button</string>
     <string name="add_button_text">Add button</string>
+    <string name="Room_text">Room : </string>
+    <string name="room_lambda_text">Room lambda</string>
+    <string name="time_text">Time : </string>
+    <string name="seven_pm_text">07:OO PM</string>
+    <string name="subject_text">Subject : </string>
+    <string name="subject_lambda_text">Subject lambda</string>
+    <string name="participants_emails_text">Participants Emails :</string>
+    <string name="jo_fr_text">jo@lamzone.fr</string>
+    <string name="meeting_text">Meeting</string>
 </resources>

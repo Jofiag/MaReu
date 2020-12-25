@@ -1,14 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.MeetingDetailsFragment">
+    tools:context=".fragment.MeetingDetailsFragment"
+    android:padding="27dp"
+    android:gravity="center_horizontal">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/meeting_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="53dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="186dp"
+        android:layout_marginEnd="186dp"
+        android:text="@string/meeting_text"
+        android:textSize="47sp" />
 
-</FrameLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/meeting_title"
+        android:text="@string/Room_text"
+        android:textSize="27sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/room_detail_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/meeting_title"
+        android:layout_marginStart="57dp"
+        android:layout_toEndOf="@+id/textView"
+        android:text="@string/room_lambda_text"
+        android:textSize="27sp"/>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView"
+        android:layout_marginTop="37dp"
+        android:text="@string/time_text"
+        android:textSize="27sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/time_detail_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/room_detail_text"
+        android:layout_marginStart="57dp"
+        android:layout_marginTop="37dp"
+        android:layout_toEndOf="@+id/textView3"
+        android:text="@string/seven_pm_text"
+        android:textSize="27sp" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView3"
+        android:layout_marginTop="37dp"
+        android:text="@string/subject_text"
+        android:textSize="27sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/subject_detail_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/time_detail_text"
+        android:layout_marginStart="57dp"
+        android:layout_marginTop="37dp"
+        android:layout_toEndOf="@+id/textView5"
+        android:text="@string/subject_lambda_text"
+        android:textSize="27sp" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView5"
+        android:layout_marginTop="37dp"
+        android:text="@string/participants_emails_text"
+        android:textSize="27sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/emails_detail_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/subject_detail_text"
+        android:layout_marginStart="57dp"
+        android:layout_marginTop="37dp"
+        android:layout_toEndOf="@+id/textView7"
+        android:text="@string/jo_fr_text"
+        android:textSize="27sp" />
+</RelativeLayout>
