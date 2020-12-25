@@ -1,5 +1,6 @@
 package com.example.mareu.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -49,11 +50,12 @@ public class MeetingListFragment extends Fragment {
     }
 
     private void setRecyclerView(View view){
+        Context context = view.getContext();
         List<Meeting> meetingList = MeetingDatabase.getInstance().initiateMeetingList();
-        MeetingListRecyclerViewAdapter adapter = new MeetingListRecyclerViewAdapter(meetingList);
+        MeetingListRecyclerViewAdapter adapter = new MeetingListRecyclerViewAdapter(context, meetingList);
 
         recyclerView.hasFixedSize();
-        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(adapter);
     }
 

@@ -1,5 +1,6 @@
 package com.example.mareu.adapter;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,11 +22,18 @@ import java.util.List;
 import java.util.Random;
 
 public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<MeetingListRecyclerViewAdapter.MyViewHolder> {
+    public interface OnMeetingClickListener {
+        void onMeetingSelected(Meeting meeting);
+    }
 
     private List<Meeting> meetingList = new ArrayList<>();
+    private Context context;
+    private OnMeetingClickListener mCallback;
 
-    public MeetingListRecyclerViewAdapter(List<Meeting> meetingList) {
+    public MeetingListRecyclerViewAdapter(Context context, List<Meeting> meetingList) {
         this.meetingList = meetingList;
+        this.context = context;
+        this.mCallback = (OnMeetingClickListener) context;
     }
 
     @NonNull
@@ -56,10 +64,11 @@ public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<Meeting
         holder.deleteImageButton.setOnClickListener(v -> {
             if (MeetingDatabase.getInstance().getMeetingList().contains(meeting))
                 CrudMeetingApi.deleteMeeting(meeting);
-
             meetingList.remove(meeting);
-
             notifyDataSetChanged();
+        });
+        holder.itemView.setOnClickListener(v -> {
+            mCallback.onMeetingSelected(meeting);
         });
     }
 

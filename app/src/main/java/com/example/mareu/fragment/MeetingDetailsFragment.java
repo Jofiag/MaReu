@@ -14,9 +14,11 @@ import com.example.mareu.model.Meeting;
 
 import java.util.List;
 
+import static com.example.mareu.controler.MainActivity.MEETING_SELECTED_CODE;
+
 
 public class MeetingDetailsFragment extends Fragment {
-
+    private Meeting meeting;
 
     public MeetingDetailsFragment() {
         // Required empty public constructor
@@ -26,20 +28,22 @@ public class MeetingDetailsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Bundle bundle = getArguments();
+        if (bundle != null)
+            this.meeting = (Meeting) bundle.getSerializable(MEETING_SELECTED_CODE);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_meeting_details, container, false);
 
-        Meeting meeting = new Meeting();
         showMeetingDetails(view, meeting);
 
         return view;
     }
 
     private void showMeetingDetails(View view, Meeting meeting){
-        TextView roomText  = view.findViewById(R.id.room_detail_text);
+        TextView roomText = view.findViewById(R.id.room_detail_text);
         TextView timeText = view.findViewById(R.id.time_detail_text);
         TextView subjectText = view.findViewById(R.id.subject_detail_text);
         TextView participantsEmailsText = view.findViewById(R.id.participants_emails_text);

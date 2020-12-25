@@ -8,10 +8,13 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 
 import com.example.mareu.R;
+import com.example.mareu.adapter.MeetingListRecyclerViewAdapter;
 import com.example.mareu.fragment.MeetingDetailsFragment;
 import com.example.mareu.fragment.MeetingListFragment;
+import com.example.mareu.model.Meeting;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MeetingListRecyclerViewAdapter.OnMeetingClickListener {
+    public static final String MEETING_SELECTED_CODE = "meeting selected";
     private boolean isDualPane;
 
     @Override
@@ -21,9 +24,6 @@ public class MainActivity extends AppCompatActivity {
 
         attachNewFragment(new MeetingListFragment(), R.id.meeting_list_fragment_container);
         setDualPane();
-
-        if (isDualPane)
-            attachNewFragment(new MeetingDetailsFragment(), R.id.meeting_details_fragment_container);
 
     }
 
@@ -35,10 +35,26 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
+    private void attachMeetingDetailsFragment(Meeting meetingSelected){
+        Fragment fragment = new MeetingDetailsFragment();
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(MEETING_SELECTED_CODE, meetingSelected);
+        fragment.setArguments(bundle);
+
+        attachNewFragment(fragment, R.id.meeting_details_fragment_container);
+    }
+
     private void setDualPane(){
         if (findViewById(R.id.meeting_details_fragment_container) != null)
             isDualPane = true;
         else
             isDualPane = false;
+    }
+
+    @Override
+    public void onMeetingSelected(Meeting meeting) {
+        if (isDualPane)
+            attachMeetingDetailsFragment(meeting);
     }
 }
