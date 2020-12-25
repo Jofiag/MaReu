@@ -60,6 +60,6 @@ public class MeetingDetailsFragment extends Fragment {
         roomText.setText(meeting.getPlace());
         timeText.setText(meeting.getTime());
         subjectText.setText(meeting.getSubject());
-        participantsEmailsText.setText(meeting.getParticipantMailList().toString());
+        participantsEmailsText.setText(emailsText);
     }
 }
