@@ -22,8 +22,8 @@
 
             <ImageView
                 android:id="@+id/meeting_image_view"
-                android:layout_width="27dp"
-                android:layout_height="27dp"
+                android:layout_width="37dp"
+                android:layout_height="37dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="7dp"
@@ -46,7 +46,7 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:maxLines="1"
-                android:maxWidth="277dp"/>
+                android:maxWidth="237dp" />
 
             <TextView
                 android:id="@+id/participants_emails_text"
@@ -57,17 +57,17 @@
                 android:layout_toEndOf="@+id/meeting_image_view"
                 android:layout_marginStart="11dp"
                 android:maxLines="1"
-                android:maxWidth="257dp"/>
+                android:maxWidth="217dp"/>
 
             <ImageButton
                 android:id="@+id/delete_image_button"
-                android:layout_width="27dp"
-                android:layout_height="27dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="7dp"
-                android:contentDescription="@string/image_button_text"
                 android:background="@android:color/transparent"
+                android:contentDescription="@string/image_button_text"
                 android:src="@android:drawable/ic_menu_delete" />
 
         </RelativeLayout>

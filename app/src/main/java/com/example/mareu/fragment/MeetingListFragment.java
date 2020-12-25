@@ -1,6 +1,7 @@
 package com.example.mareu.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,16 +11,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.mareu.MeetingDatabase;
 import com.example.mareu.R;
 import com.example.mareu.adapter.MeetingListRecyclerViewAdapter;
+import com.example.mareu.controler.AddMeetingActivity;
 import com.example.mareu.model.Meeting;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class MeetingListFragment extends Fragment {
@@ -40,6 +39,7 @@ public class MeetingListFragment extends Fragment {
 
         setReference(view);
         setRecyclerView(view);
+        startAddMeetingActivity(view);
 
         return view;
     }
@@ -59,12 +59,7 @@ public class MeetingListFragment extends Fragment {
         recyclerView.setAdapter(adapter);
     }
 
-    private void addMeeting(View view){
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+    private void startAddMeetingActivity(View view){
+        fab.setOnClickListener(v -> startActivity(new Intent(view.getContext(), AddMeetingActivity.class)));
     }
 }
