@@ -4,12 +4,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.AddMeetingFragment">
+    tools:context=".fragment.AddMeetingFragment"
+    android:orientation="vertical"
+    android:padding="17dp">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <EditText
+        android:id="@+id/room_edit_text"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/Room_text"
+        android:layout_marginBottom="7dp"
+        android:importantForAutofill="no" />
+
+    <EditText
+        android:id="@+id/time_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/time_text"
+        android:importantForAutofill="no"
+        android:layout_marginBottom="7dp"/>
+
+    <EditText
+        android:id="@+id/subject_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/subject_text"
+        android:importantForAutofill="no"
+        android:layout_marginBottom="7dp"/>
+
+    <EditText
+        android:id="@+id/participant_emails_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/participants_emails_text"
+        android:importantForAutofill="no"
+        android:layout_marginBottom="17dp"/>
+
+    <TextView
+        android:id="@+id/participants_emails_text_add_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="7dp"/>
+
+    <Button
+        android:id="@+id/add_participant_email_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/add_participant_email_text"
+        android:layout_marginBottom="7dp"/>
+
+    <Button
+        android:id="@+id/save_meeting_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/save_meeting_text" />
 
 </LinearLayout>

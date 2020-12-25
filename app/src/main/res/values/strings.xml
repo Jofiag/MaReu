@@ -16,4 +16,8 @@
     <string name="participants_emails_text">Participants Emails :</string>
     <string name="jo_fr_text">jo@lamzone.fr</string>
     <string name="meeting_text">Meeting</string>
+    <string name="room_a_text">Room A</string>
+    <string name="add_participant_email_text">ADD PARTICIPANT EMAIL</string>
+    <string name="save_meeting_text">SAVE MEETING</string>
+    <string name="save_email_text">Save email</string>
 </resources>
