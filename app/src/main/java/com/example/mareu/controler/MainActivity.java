@@ -42,7 +42,6 @@ public class MainActivity extends AppCompatActivity implements MeetingListRecycl
         bundle.putSerializable(MEETING_SELECTED_CODE, meetingSelected);
         fragment.setArguments(bundle);
 
-        //Utils.attachNewFragment(fragment, R.id.meeting_details_fragment_container);
         attachNewFragment(fragment, R.id.meeting_details_fragment_container);
     }
 
