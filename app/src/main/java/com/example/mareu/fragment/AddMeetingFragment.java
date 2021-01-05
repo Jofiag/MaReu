@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AddMeetingFragment extends Fragment {
-    private List<Meeting> meetingList = MeetingDatabase.getInstance().getMeetingList();
+    private final List<Meeting> meetingList = MeetingDatabase.getInstance().getMeetingList();
 
     public AddMeetingFragment() {
     }
@@ -54,17 +54,16 @@ public class AddMeetingFragment extends Fragment {
 
         Meeting meeting = new Meeting();
         List<String> emailsList = new ArrayList<>();
-        String roomEntered = roomEdit.getText().toString().trim();
-        String timeEntered = timeEdit.getText().toString().trim();
-        String subjectEntered = subjectEdit.getText().toString().trim();
-        boolean fieldsEnteredNotEmpty = !TextUtils.isEmpty(roomEntered) &&
-                                        !TextUtils.isEmpty(timeEntered) &&
-                                        !TextUtils.isEmpty(subjectEntered);
 
         addParticipantEmailButton.setOnClickListener(v -> addAParticipant(context, popupView, emailsList, participantsEmailsText));
 
         saveMeetingButton.setOnClickListener(v -> {
-            if ( fieldsEnteredNotEmpty && !emailsList.isEmpty()){
+            String roomEntered = roomEdit.getText().toString().trim();
+            String timeEntered = timeEdit.getText().toString().trim();
+            String subjectEntered = subjectEdit.getText().toString().trim();
+            boolean fieldsEnteredNotEmpty = !TextUtils.isEmpty(roomEntered) && !TextUtils.isEmpty(timeEntered) && !TextUtils.isEmpty(subjectEntered);
+
+            if (fieldsEnteredNotEmpty && !emailsList.isEmpty()){
                     meeting.setPlace(roomEntered);
                     meeting.setTime(timeEntered);
                     meeting.setSubject(subjectEntered);
