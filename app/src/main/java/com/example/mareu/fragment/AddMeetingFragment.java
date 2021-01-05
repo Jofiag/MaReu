@@ -91,20 +91,22 @@ public class AddMeetingFragment extends Fragment {
         dialog.setMessage("Enter participant email");
         dialog.show();
 
-        String emailEntered = participantEmailEdit.getText().toString().trim();
-        StringBuilder emailsText = new StringBuilder();
-        if (!TextUtils.isEmpty(emailEntered)) {
-            saveEmailButton.setOnClickListener(v -> {
+        saveEmailButton.setOnClickListener(v -> {
+            String emailEntered = participantEmailEdit.getText().toString().trim();
+            StringBuilder emailsText = new StringBuilder();
+
+            if (!TextUtils.isEmpty(emailEntered)) {
                 if (!emailsList.contains(emailEntered)) {
                     emailsList.add(emailEntered);
                     emailsText.append(emailsText).append("\n").append(emailEntered);
                     participantsEmailsText.setText(emailsText);
                     dialog.dismiss();
-                } else
+                }
+                else
                     Toast.makeText(context, "This participant already exist in this meeting", Toast.LENGTH_SHORT).show();
-            });
-        }
-        else
-            Toast.makeText(context, "Empty field is not allowed !", Toast.LENGTH_SHORT).show();
+            }
+            else
+                Toast.makeText(context, "Empty field is not allowed !", Toast.LENGTH_SHORT).show();
+        });
     }
 }
