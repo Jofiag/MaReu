@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<MeetingListRecyclerViewAdapter.MyViewHolder> {
     public interface OnMeetingClickListener {
         void onMeetingSelected(Meeting meeting);
@@ -78,7 +80,7 @@ public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<Meeting
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        private final ImageView meetingImageView;
+        private final CircleImageView meetingImageView;
         private final TextView someMeetingDetailsText;
         private final TextView participantsEmailsText;
         private final ImageButton deleteImageButton;
