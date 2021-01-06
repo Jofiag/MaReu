@@ -106,6 +106,18 @@
             android:layout_marginEnd="57dp"
             android:text="@string/save_meeting_text" />
 
+        <Button
+            android:id="@+id/show_meeting_list_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/save_meeting_button"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="77dp"
+            android:layout_marginTop="17dp"
+            android:layout_marginEnd="77dp"
+            android:text="@string/show_all_meeting_text" />
+
     </RelativeLayout>
 
 </ScrollView>

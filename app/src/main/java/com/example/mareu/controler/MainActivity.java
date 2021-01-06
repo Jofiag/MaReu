@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity implements MeetingListRecycl
 
         attachNewFragment(new MeetingListFragment(), R.id.meeting_list_fragment_container);
         setDualPane();
-
     }
 
     public void attachNewFragment(Fragment newFragment, int container) {

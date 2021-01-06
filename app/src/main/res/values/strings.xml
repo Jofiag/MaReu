@@ -20,4 +20,5 @@
     <string name="add_participant_email_text">ADD PARTICIPANT EMAIL</string>
     <string name="save_meeting_text">SAVE MEETING</string>
     <string name="save_email_text">Save email</string>
+    <string name="show_all_meeting_text">SHOW ALL MEETING</string>
 </resources>
