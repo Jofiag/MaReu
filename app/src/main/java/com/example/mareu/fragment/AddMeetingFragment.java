@@ -38,7 +38,7 @@ public class AddMeetingFragment extends Fragment {
     private final StringBuilder emailText = new StringBuilder();
 
     private final Meeting meeting = new Meeting();
-    private final List<Meeting> meetingList = new ArrayList<>();
+    private List<Meeting> meetingList = new ArrayList<>();
     private final List<String> emailsList = new ArrayList<>();
 
     public AddMeetingFragment() {
@@ -49,11 +49,18 @@ public class AddMeetingFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_add_meeting, container, false);
         Context context = view.getContext();
 
+        getMeetingList();
         setReferences(view);
         saveMeeting(context);
         showAllMeeting();
 
         return view;
+    }
+
+    private void getMeetingList() {
+        Bundle bundle = getArguments();
+        if (bundle != null)
+            meetingList = (List<Meeting>) bundle.getSerializable(MEETING_LIST_CODE);
     }
 
     private void setReferences(View view){
@@ -84,6 +91,8 @@ public class AddMeetingFragment extends Fragment {
                 meeting.setParticipantMailList(emailsList);
 
                 meetingList.add(meeting);
+                if (meetingList.contains(meeting))
+                    Toast.makeText(context, "Meeting saved !", Toast.LENGTH_SHORT).show();
             }
             else if (!fieldsEnteredNotEmpty)
                 Toast.makeText(context, "Empty field are not allowed !", Toast.LENGTH_SHORT).show();

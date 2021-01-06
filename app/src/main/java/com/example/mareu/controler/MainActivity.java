@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.mareu.MeetingDatabase;
 import com.example.mareu.R;
 import com.example.mareu.adapter.MeetingListRecyclerViewAdapter;
 import com.example.mareu.fragment.MeetingDetailsFragment;
@@ -38,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements MeetingListRecycl
         Bundle bundle = getIntent().getExtras();
         if (bundle != null)
             meetingList = (List<Meeting>) bundle.getSerializable(MEETING_LIST_CODE);
+        else
+            meetingList = MeetingDatabase.getInstance().getMeetingList();
     }
 
     private void attachNewFragment(Fragment newFragment, int container) {

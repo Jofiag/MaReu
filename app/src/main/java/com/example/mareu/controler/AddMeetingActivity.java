@@ -9,15 +9,39 @@ import android.os.Bundle;
 
 import com.example.mareu.R;
 import com.example.mareu.fragment.AddMeetingFragment;
+import com.example.mareu.model.Meeting;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.example.mareu.fragment.AddMeetingFragment.MEETING_LIST_CODE;
 
 public class AddMeetingActivity extends AppCompatActivity {
+    private List<Meeting> meetingList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_meeting);
+        getMeetingListFromMeetingListFragment();
+        attachAddMeetingFragment();
+    }
 
-        attachNewFragment(new AddMeetingFragment(), R.id.add_meeting_fragment_container);
+    private void getMeetingListFromMeetingListFragment() {
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null)
+            meetingList = (List<Meeting>) bundle.getSerializable(MEETING_LIST_CODE);
+    }
+
+    private void attachAddMeetingFragment() {
+        Fragment fragment = new AddMeetingFragment();
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(MEETING_LIST_CODE, (Serializable) meetingList);
+        fragment.setArguments(bundle);
+
+        attachNewFragment(fragment, R.id.add_meeting_fragment_container);
     }
 
     public void attachNewFragment(Fragment newFragment, int container) {

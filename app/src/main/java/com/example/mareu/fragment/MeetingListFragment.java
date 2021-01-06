@@ -3,6 +3,7 @@ package com.example.mareu.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import com.example.mareu.controler.AddMeetingActivity;
 import com.example.mareu.model.Meeting;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,8 +76,11 @@ public class MeetingListFragment extends Fragment {
     }
 
     private void startAddMeetingActivity(View view){
+        Intent intent = new Intent(view.getContext(), AddMeetingActivity.class);
+        intent.putExtra(MEETING_LIST_CODE, (Serializable) meetingList);
+
         fab.setOnClickListener(v -> {
-            startActivity(new Intent(view.getContext(), AddMeetingActivity.class));
+            startActivity(intent);
             getActivity().finish();
         });
     }
