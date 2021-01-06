@@ -39,11 +39,6 @@ public class AddMeetingFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_meeting, container, false);
         Context context = view.getContext();
@@ -92,15 +87,17 @@ public class AddMeetingFragment extends Fragment {
 
         saveEmailButton.setOnClickListener(v -> {
             String emailEntered = emailEdit.getText().toString().trim();
-            if (!TextUtils.isEmpty(emailEntered)){
+            if (!TextUtils.isEmpty(emailEntered) && !emailsList.contains(emailEntered)){
                 emailsList.add(emailEntered);
-                emailText.append(emailText).append("\n\n").append(emailEntered);
+                emailText.append(emailEntered).append("\n\n");
                 participantsEmailsText.setText(emailText);
 
                 addParticipantEmailButton.setVisibility(View.VISIBLE);
                 emailEdit.setVisibility(View.GONE);
                 saveEmailButton.setVisibility(View.GONE);
             }
+            else if (emailsList.contains(emailEntered))
+                Toast.makeText(getContext(), "Already added to this meeting !", Toast.LENGTH_SHORT).show();
             else
                 Toast.makeText(getContext(), "Empty field not allowed !", Toast.LENGTH_SHORT).show();
         });
