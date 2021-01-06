@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.mareu.MeetingDatabase;
 import com.example.mareu.R;
 import com.example.mareu.controler.MainActivity;
 import com.example.mareu.model.Meeting;
