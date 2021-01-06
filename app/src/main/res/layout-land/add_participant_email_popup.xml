@@ -17,7 +17,7 @@
         android:layout_marginBottom="17dp"/>
 
     <Button
-        android:id="@+id/save_participant_button"
+        android:id="@+id/save_participant_button_popup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"

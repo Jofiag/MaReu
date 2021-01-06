@@ -13,7 +13,7 @@
     <string name="seven_pm_text">07:OO PM</string>
     <string name="subject_text">Subject : </string>
     <string name="subject_lambda_text">Subject lambda</string>
-    <string name="participants_emails_text">Participants Emails :</string>
+    <string name="participants_emails_text">A participant email :</string>
     <string name="jo_fr_text">jo@lamzone.fr</string>
     <string name="meeting_text">Meeting</string>
     <string name="room_a_text">Room A</string>
