@@ -101,22 +101,15 @@ public class MeetingListFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        switch (item.getItemId()){
-            case R.id.sort_by_date_item:
-                sortListByDate();
-                return true;
-            case R.id.sort_by_name_item:
-                sortListByName();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.sort_by_name_item) {
+            sortListByPlace();
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 
-    private void sortListByDate(){}
-
-    private void sortListByName(){
-        Collections.sort(meetingList, (meeting1, meeting2) -> meeting1.getSubject().compareTo(meeting2.getSubject()));
+    private void sortListByPlace(){
+        Collections.sort(meetingList, (meeting1, meeting2) -> meeting1.getPlace().compareTo(meeting2.getPlace()));
         adapter.notifyDataSetChanged();
         Toast.makeText(getActivity(), "List sorted !", Toast.LENGTH_SHORT).show();
     }

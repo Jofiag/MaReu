@@ -7,10 +7,6 @@
         app:showAsAction="ifRoom">
 
         <menu>
-
-            <item android:id="@+id/sort_by_date_item"
-                android:title="@string/date_text" />
-
             <item android:id="@+id/sort_by_name_item"
                 android:title="@string/name_text"/>
 
