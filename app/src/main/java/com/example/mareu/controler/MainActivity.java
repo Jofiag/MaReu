@@ -13,25 +13,49 @@ import com.example.mareu.fragment.MeetingDetailsFragment;
 import com.example.mareu.fragment.MeetingListFragment;
 import com.example.mareu.model.Meeting;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.example.mareu.fragment.AddMeetingFragment.MEETING_LIST_CODE;
+
 public class MainActivity extends AppCompatActivity implements MeetingListRecyclerViewAdapter.OnMeetingClickListener {
     public static final String MEETING_SELECTED_CODE = "meeting selected";
     private boolean isDualPane;
+    private List<Meeting> meetingList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        attachNewFragment(new MeetingListFragment(), R.id.meeting_list_fragment_container);
+        getMeetingListFromAddMeetingActivity();
+        attachMeetingListFragment();
         setDualPane();
     }
 
-    public void attachNewFragment(Fragment newFragment, int container) {
+    private void getMeetingListFromAddMeetingActivity() {
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null)
+            meetingList = (List<Meeting>) bundle.getSerializable(MEETING_LIST_CODE);
+    }
+
+    private void attachNewFragment(Fragment newFragment, int container) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         fragmentTransaction.replace(container, newFragment);
         fragmentTransaction.commit();
+    }
+
+    private void attachMeetingListFragment(){
+        Fragment fragment = new MeetingListFragment();
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(MEETING_LIST_CODE, (Serializable) meetingList);
+        fragment.setArguments(bundle);
+
+        attachNewFragment(fragment, R.id.meeting_list_fragment_container);
     }
 
     private void attachMeetingDetailsFragment(Meeting meetingSelected){
