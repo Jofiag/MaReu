@@ -20,9 +20,13 @@ import com.example.mareu.controler.AddMeetingActivity;
 import com.example.mareu.model.Meeting;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.mareu.fragment.AddMeetingFragment.MEETING_LIST_CODE;
+
 public class MeetingListFragment extends Fragment {
+    private List<Meeting> meetingList = new ArrayList<>();
     private RecyclerView recyclerView;
     private FloatingActionButton fab;
 
@@ -38,11 +42,21 @@ public class MeetingListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list_meeting, container, false);
 
+        getMeetingList();
         setReference(view);
         setRecyclerView(view);
         startAddMeetingActivity(view);
 
         return view;
+    }
+
+    private void getMeetingList() {
+        Bundle bundle = getArguments();
+
+        if (bundle != null)
+            meetingList = (List<Meeting>) bundle.getSerializable(MEETING_LIST_CODE);
+        else
+            meetingList = MeetingDatabase.getInstance().getMeetingList();
     }
 
     private void setReference(View view){
@@ -52,7 +66,6 @@ public class MeetingListFragment extends Fragment {
 
     private void setRecyclerView(View view){
         Context context = view.getContext();
-        List<Meeting> meetingList = MeetingDatabase.getInstance().initiateMeetingList();
         MeetingListRecyclerViewAdapter adapter = new MeetingListRecyclerViewAdapter(context, meetingList);
 
         recyclerView.hasFixedSize();
@@ -61,7 +74,9 @@ public class MeetingListFragment extends Fragment {
     }
 
     private void startAddMeetingActivity(View view){
-        fab.setOnClickListener(v -> startActivity(new Intent(view.getContext(), AddMeetingActivity.class)));
-        getActivity().finish();
+        fab.setOnClickListener(v -> {
+            startActivity(new Intent(view.getContext(), AddMeetingActivity.class));
+            getActivity().finish();
+        });
     }
 }
