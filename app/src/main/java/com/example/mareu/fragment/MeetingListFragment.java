@@ -62,5 +62,6 @@ public class MeetingListFragment extends Fragment {
 
     private void startAddMeetingActivity(View view){
         fab.setOnClickListener(v -> startActivity(new Intent(view.getContext(), AddMeetingActivity.class)));
+        getActivity().finish();
     }
 }
