@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,9 +31,7 @@ import java.util.List;
 public class AddMeetingFragment extends Fragment {
     public static final String MEETING_LIST_CODE = "meeting list";
     private TextView participantsEmailsTextView, dateTextView, hourTextView;
-    private EditText roomEdit;
-    private EditText subjectEdit;
-    private EditText emailEdit;
+    private EditText roomEdit, subjectEdit, emailEdit;
     private Button addParticipantEmailButton, saveEmailButton, saveMeetingButton, showAllMeetingButton, setDateButton, setHourButton;
 
     private final StringBuilder emailText = new StringBuilder();
@@ -42,8 +41,6 @@ public class AddMeetingFragment extends Fragment {
     private final List<String> emailsList = new ArrayList<>();
 
     private final Calendar calendar = Calendar.getInstance();
-
-    private int day, month, year, hour, minute;
 
     public AddMeetingFragment() {
     }
@@ -95,17 +92,12 @@ public class AddMeetingFragment extends Fragment {
             if (fieldsEnteredNotEmpty && !emailsList.isEmpty()){
                 meeting.setPlace(roomEntered);
                 meeting.setSubject(subjectEntered);
-                meeting.setTime(hour + "h" + minute);
                 meeting.setParticipantMailList(emailsList);
-                meeting.setDay(day);
-                meeting.setMonth(month);
-                meeting.setYear(year);
-                meeting.setHour(hour);
-                meeting.setMinutes(minute);
 
                 MyMethodsApi.addMeeting(meetingList, meeting);
                 if (meetingList.contains(meeting))
-                    Toast.makeText(context, "Meeting saved !", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Meeting saved !" + meeting.getDay() + "/" + meeting.getMonth() + "/" + meeting.getYear(), Toast.LENGTH_SHORT).show();
+                Log.d("Meeting", "saveMeeting: " + meeting.getDay() + "/" + meeting.getMonth() + "/" + meeting.getYear());
             }
             else if (!fieldsEnteredNotEmpty)
                 Toast.makeText(context, "Empty field are not allowed !", Toast.LENGTH_SHORT).show();
@@ -116,14 +108,19 @@ public class AddMeetingFragment extends Fragment {
 
     private void setDate(){
         //Current date
-        day = calendar.get(Calendar.DAY_OF_MONTH);
-        month = calendar.get(Calendar.MONTH);
-        year = calendar.get(Calendar.YEAR);
+        int currentDay = calendar.get(Calendar.DAY_OF_MONTH);
+        int currentMonth = calendar.get(Calendar.MONTH);
+        int currentYear = calendar.get(Calendar.YEAR);
 
         //DatePicker
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
             DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
-                    (view, year, monthOfYear, dayOfMonth) -> dateTextView.setText(MessageFormat.format("{0}/{1}/{2}", dayOfMonth, monthOfYear + 1, year)), year, month, day);
+                    (view, year, monthOfYear, dayOfMonth) -> {
+                        dateTextView.setText(MessageFormat.format("{0}/{1}/{2}", dayOfMonth, monthOfYear + 1, year));
+                        meeting.setDay(dayOfMonth);
+                        meeting.setMonth(monthOfYear + 1);
+                        meeting.setYear(year);
+                    }, currentYear, currentMonth, currentDay);
 
             datePickerDialog.show();
         }
@@ -131,12 +128,17 @@ public class AddMeetingFragment extends Fragment {
 
     private void setHour(){
         //Current time
-        hour = calendar.get(Calendar.HOUR_OF_DAY);
-        minute = calendar.get(Calendar.MINUTE);
+        int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
+        int currentMinute = calendar.get(Calendar.MINUTE);
 
         //Time picker
         TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(),
-                (view, hourOfDay, minute) -> hourTextView.setText(MessageFormat.format("{0}h{1}", hourOfDay, minute)), hour, minute, true);
+                (view, hourOfDay, minute) -> {
+                    hourTextView.setText(MessageFormat.format("{0}h{1}", hourOfDay, minute));
+                    meeting.setHour(hourOfDay);
+                    meeting.setMinutes(minute);
+                    meeting.setTime(hourOfDay + "h" + minute);
+                }, currentHour, currentMinute, true);
 
         timePickerDialog.show();
     }

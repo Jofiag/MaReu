@@ -1,6 +1,5 @@
 package com.example.mareu.fragment;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -32,6 +31,12 @@ import java.util.List;
 import static com.example.mareu.fragment.AddMeetingFragment.MEETING_LIST_CODE;
 
 public class MeetingListFragment extends Fragment {
+    public static final String TOMORROW = "Tomorrow";
+    public static final String TODAY = "Today";
+    public static final String ALL_ROOM = "All Room";
+    public static final String ROOM_C = "Room C";
+    public static final String ROOM_B = "Room B";
+    public static final String ROOM_A = "Room A";
     private List<Meeting> meetingList = new ArrayList<>();
     private RecyclerView recyclerView;
     private MeetingListRecyclerViewAdapter adapter;
@@ -131,57 +136,51 @@ public class MeetingListFragment extends Fragment {
 
     }*/
 
-    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        switch (item.getItemId()){
-            case R.id.room_a_select_item:
-                filterMeetingList("Room A");
-                return true;
-            case R.id.room_b_select_item:
-                filterMeetingList("Room B");
-                return true;
-            case R.id.room_c_select_item:
-                filterMeetingList("Room C");
-                return true;
-            case R.id.all_room_select_item:
-                filterMeetingList("All Room");
-                return true;
-            case R.id.today_select_item:
-                filterMeetingList("Today");
-                return true;
-            case R.id.tomorrow_select_item:
-                filterMeetingList("Tomorrow");
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+        if (item.getItemId() == R.id.room_a_select_item)
+            filterMeetingList(ROOM_A);
+        else if (item.getItemId() == R.id.room_b_select_item)
+            filterMeetingList(ROOM_B);
+        else if (item.getItemId() == R.id.room_c_select_item)
+            filterMeetingList(ROOM_C);
+        else if (item.getItemId() == R.id.all_room_select_item)
+            filterMeetingList(ALL_ROOM);
+        else if (item.getItemId() == R.id.today_select_item)
+            filterMeetingList(TODAY);
+        else if (item.getItemId() == R.id.tomorrow_select_item)
+            filterMeetingList(TOMORROW);
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void filterMeetingList(String status){
             List<Meeting> filteredList;
 
-            switch (status){
-                case "Room A":
-                    filteredList = MyMethodsApi.selectMeetingInRoomA(meetingList);
-                    break;
-                case "Room B":
-                    filteredList = MyMethodsApi.selectMeetingInRoomB(meetingList);
-                    break;
-                case "Room C":
-                    filteredList = MyMethodsApi.selectMeetingInRoomC(meetingList);
-                    break;
-                case "All Room":
-                    filteredList = MyMethodsApi.selectAllMeeting(meetingList);
-                    break;
-                case "Today":
-                    filteredList = MyMethodsApi.selectTodayMeeting(meetingList);
-                    break;
-                default:
-                    filteredList = MyMethodsApi.selectTomorrowMeeting(meetingList);
-                    break;
-            }
+        switch (status) {
+            case ROOM_A:
+                filteredList = MyMethodsApi.selectMeetingInRoomA(meetingList);
+                break;
+            case ROOM_B:
+                filteredList = MyMethodsApi.selectMeetingInRoomB(meetingList);
+                break;
+            case ROOM_C:
+                filteredList = MyMethodsApi.selectMeetingInRoomC(meetingList);
+                break;
+            case ALL_ROOM:
+                filteredList = MyMethodsApi.selectAllMeeting(meetingList);
+                break;
+            case TODAY:
+                filteredList = MyMethodsApi.selectTodayMeeting(meetingList);
+                break;
+            case TOMORROW:
+                filteredList = MyMethodsApi.selectTomorrowMeeting(meetingList);
+                break;
+            default:
+                filteredList = meetingList;
+                break;
+        }
 
             adapter = new MeetingListRecyclerViewAdapter(getActivity(), filteredList);
             recyclerView.setAdapter(adapter);

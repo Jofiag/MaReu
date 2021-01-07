@@ -5,10 +5,9 @@ import com.example.mareu.model.Meeting;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.List;
 
-public class MyMethodsApi {
+public class MyMethodsApi{
     private static final MeetingDatabase db = MeetingDatabase.getInstance();
 
     public static void addMeeting(List<Meeting> meetingList, Meeting meeting){
@@ -18,11 +17,6 @@ public class MyMethodsApi {
 
     public static void deleteMeeting(List<Meeting> meetingList, Meeting meeting){
         meetingList.remove(meeting);
-        db.setMeetingList(meetingList);
-    }
-
-    public static void sortMeetingListByPlace(List<Meeting> meetingList){
-        Collections.sort(meetingList, (meeting1, meeting2) -> meeting1.getPlace().compareTo(meeting2.getPlace()));
         db.setMeetingList(meetingList);
     }
 
@@ -74,14 +68,11 @@ public class MyMethodsApi {
         List<Meeting> filteredList = new ArrayList<>();
 
         Calendar calendar = Calendar.getInstance();
-        int actualDay = calendar.get(Calendar.DAY_OF_MONTH);
-        int actualMonth = calendar.get(Calendar.MONTH);
-        int actualYear = calendar.get(Calendar.YEAR);
-
+        int currentDay = calendar.get(Calendar.DAY_OF_MONTH);
 
         for (Meeting meeting : meetingList){
-            boolean today = meeting.getDay() == actualDay && meeting.getMonth() == actualMonth && meeting.getYear() == actualYear;
-            if (today)
+            boolean meetingIsToday = meeting.getDay() == currentDay;
+            if (meetingIsToday)
                 filteredList.add(meeting);
         }
 
@@ -92,14 +83,12 @@ public class MyMethodsApi {
         List<Meeting> filteredList = new ArrayList<>();
 
         Calendar calendar = Calendar.getInstance();
-        int actualDay = calendar.get(Calendar.DAY_OF_MONTH);
-        int actualMonth = calendar.get(Calendar.MONTH);
-        int actualYear = calendar.get(Calendar.YEAR);
+        int currentDay = calendar.get(Calendar.DAY_OF_MONTH);
 
 
         for (Meeting meeting : meetingList){
-            boolean tomorrow = meeting.getDay() == actualDay+1 && meeting.getMonth() == actualMonth && meeting.getYear() == actualYear;
-            if (tomorrow)
+            boolean meetingIsTomorrow = meeting.getDay() == currentDay+1;
+            if (meetingIsTomorrow)
                 filteredList.add(meeting);
         }
 

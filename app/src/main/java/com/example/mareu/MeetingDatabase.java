@@ -21,6 +21,15 @@ public class MeetingDatabase {
         Meeting meeting1 = new Meeting("Room A", "Finance", "10h30", Arrays.asList("jo@gmail.com", "fi@gmail.com", "ag@gmail.com"));
         Meeting meeting2 = new Meeting("Room B", "Economy", "10h30", Arrays.asList("fi@gmail.com", "gn@gmail.com", "on@gmail.com"));
         Meeting meeting3 = new Meeting("Room C", "Politic", "10h30", Arrays.asList("ah@gmail.com", "ab@gmail.com"));
+
+        meeting1.setDay(7);
+        meeting1.setMonth(1);
+        meeting1.setYear(2021);
+
+        meeting2.setDay(8);
+        meeting2.setMonth(1);
+        meeting2.setYear(2021);
+
         meetingList.add(meeting1);
         meetingList.add(meeting2);
         meetingList.add(meeting3);
