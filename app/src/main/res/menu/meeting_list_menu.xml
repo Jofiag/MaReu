@@ -1,17 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:title="@string/filter_text">
 
-    <item android:id="@+id/sort_by"
-        android:title="@string/sort_by_text"
-        app:showAsAction="ifRoom">
-
+    <item android:id="@+id/room_filter"
+        android:title="@string/room_filter_text"
+        app:showAsAction="never">
         <menu>
-            <item android:id="@+id/sort_by_name_item"
-                android:title="@string/name_text"/>
-
+            <group>
+                <item android:id="@+id/room_a_select_item"
+                    android:title="@string/room_a_text"/>
+                <item android:id="@+id/room_b_select_item"
+                    android:title="@string/room_b_text" />
+                <item android:id="@+id/room_c_select_item"
+                    android:title="@string/room_c_text"/>
+                <item android:id="@+id/all_room_select_item"
+                    android:title="@string/all_room_text"/>
+            </group>
         </menu>
+    </item>
 
+    <item android:id="@+id/date_filter"
+        android:title="@string/date_filter_text"
+        app:showAsAction="never">
+        <menu>
+            <group>
+                <item android:id="@+id/today_select_item"
+                    android:title="@string/today_text"/>
+                <item android:id="@+id/tomorrow_select_item"
+                    android:title="@string/tomorrow_text"/>
+            </group>
+        </menu>
     </item>
 
 </menu>

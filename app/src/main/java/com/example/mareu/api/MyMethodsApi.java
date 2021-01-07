@@ -24,4 +24,69 @@ public class MyMethodsApi {
         Collections.sort(meetingList, (meeting1, meeting2) -> meeting1.getPlace().compareTo(meeting2.getPlace()));
         db.setMeetingList(meetingList);
     }
+
+    /*public static List<Meeting> meetingSelection(List<Meeting> meetingList, String status){
+        List<Meeting> filteredList;
+
+        switch (status){
+            case "Room A":
+                filteredList = MyMethodsApi.selectMeetingInRoomA(meetingList);
+                break;
+            case "Room B":
+                filteredList = MyMethodsApi.selectMeetingInRoomB(meetingList);
+                break;
+            case "Room C":
+                filteredList = MyMethodsApi.selectMeetingInRoomC(meetingList);
+                break;
+            default:
+                filteredList = MyMethodsApi.selectAllMeeting(meetingList);
+                break;
+        }
+
+        return filteredList;
+    }*/
+
+    public static List<Meeting> selectMeetingInRoomA(List<Meeting> meetingList){
+        List<Meeting> filteredList = new ArrayList<>();
+
+        for (Meeting meeting : meetingList){
+            if (meeting.getPlace().equals("Room A"))
+                filteredList.add(meeting);
+        }
+
+        /* OR
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            meetingList.stream()
+                    .filter(meeting -> meeting.getPlace().equals("Room A"))
+                    .forEach(filteredList::add);
+        }*/
+
+        return filteredList;
+    }
+
+    public static List<Meeting> selectMeetingInRoomB(List<Meeting> meetingList){
+        List<Meeting> filteredList = new ArrayList<>();
+
+        for (Meeting meeting : meetingList){
+            if (meeting.getPlace().equals("Room B"))
+                filteredList.add(meeting);
+        }
+
+        return filteredList;
+    }
+
+    public static List<Meeting> selectMeetingInRoomC(List<Meeting> meetingList){
+        List<Meeting> filteredList = new ArrayList<>();
+
+        for (Meeting meeting : meetingList){
+            if (meeting.getPlace().equals("Room C"))
+                filteredList.add(meeting);
+        }
+
+        return filteredList;
+    }
+
+    public static List<Meeting> selectAllMeeting(List<Meeting> meetingList){
+        return meetingList;
+    }
 }

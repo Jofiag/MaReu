@@ -8,6 +8,7 @@
     <string name="image_button_text">Image button</string>
     <string name="add_button_text">Add button</string>
     <string name="Room_text">Room : </string>
+    <string name="room_text">Room</string>
     <string name="room_lambda_text">Room lambda</string>
     <string name="time_text">Time : </string>
     <string name="seven_pm_text">07hOO</string>
@@ -16,7 +17,6 @@
     <string name="participants_emails_text">Participants email :</string>
     <string name="jo_fr_text">jo@lamzone.fr</string>
     <string name="meeting_text">Meeting</string>
-    <string name="room_a_text">Room A</string>
     <string name="add_participant_email_text">ADD PARTICIPANT EMAIL</string>
     <string name="save_meeting_text">SAVE MEETING</string>
     <string name="save_email_text">Save email</string>
@@ -29,4 +29,13 @@
     <string name="set_hour_text">set hour</string>
     <string name="Date_text">Date : </string>
     <string name="_01_01_2022_text">01/01/2022</string>
+    <string name="filter_text">FILTER</string>
+    <string name="room_a_text">Room A</string>
+    <string name="room_c_text">Room C</string>
+    <string name="room_b_text">Room B</string>
+    <string name="all_room_text">All Room</string>
+    <string name="today_text">Today</string>
+    <string name="tomorrow_text">Tomorrow</string>
+    <string name="room_filter_text">Room filter</string>
+    <string name="date_filter_text">Date filter</string>
 </resources>

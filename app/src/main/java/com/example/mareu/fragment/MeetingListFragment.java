@@ -97,20 +97,86 @@ public class MeetingListFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
+    /*@Override
+    public void onOptionsMenuClosed(@NonNull Menu menu) {
+        super.onOptionsMenuClosed(menu);
+
+        MenuItem roomA = menu.findItem(R.id.room_a_select_item);
+        MenuItem roomB = menu.findItem(R.id.room_b_select_item);
+        MenuItem roomC = menu.findItem(R.id.room_c_select_item);
+        MenuItem allRoom = menu.findItem(R.id.all_room_select_item);
+
+        List<MenuItem> itemList = new ArrayList<>();
+        itemList.add(roomA);
+        itemList.add(roomB);
+        itemList.add(roomC);
+        itemList.add(allRoom);
+
+        List<MenuItem> itemCheckedList = new ArrayList<>();
+
+        for (MenuItem item : itemList){
+            if (item.isChecked())
+                itemCheckedList.add(item);
+        }
+
+        List<Meeting> finalFilteredList = new ArrayList<>();
+        for (MenuItem item : itemCheckedList) {
+            List<Meeting> filteredList = MyMethodsApi.meetingSelection(meetingList, item.getTitle().toString());
+
+            finalFilteredList.addAll(filteredList);
+        }
+
+        adapter = new MeetingListRecyclerViewAdapter(getActivity(), finalFilteredList);
+        recyclerView.setAdapter(adapter);
+
+    }*/
+
     @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        if (item.getItemId() == R.id.sort_by_name_item) {
-            sortListByPlace();
-            return true;
+        switch (item.getItemId()){
+            case R.id.room_a_select_item:
+                filterMeetingList("Room A");
+                return true;
+            case R.id.room_b_select_item:
+                filterMeetingList("Room B");
+                return true;
+            case R.id.room_c_select_item:
+                filterMeetingList("Room C");
+                return true;
+            case R.id.all_room_select_item:
+                filterMeetingList("All");
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
-    private void sortListByPlace(){
-        MyMethodsApi.sortMeetingListByPlace(meetingList);
-        adapter.notifyDataSetChanged();
-        Toast.makeText(getActivity(), "List sorted !", Toast.LENGTH_SHORT).show();
+    private void filterMeetingList(String status){
+            List<Meeting> filteredList;
+
+            switch (status){
+                case "Room A":
+                    filteredList = MyMethodsApi.selectMeetingInRoomA(meetingList);
+                    break;
+                case "Room B":
+                    filteredList = MyMethodsApi.selectMeetingInRoomB(meetingList);
+                    break;
+                case "Room C":
+                    filteredList = MyMethodsApi.selectMeetingInRoomC(meetingList);
+                    break;
+                default:
+                    filteredList = MyMethodsApi.selectAllMeeting(meetingList);
+                    break;
+            }
+
+            adapter = new MeetingListRecyclerViewAdapter(getActivity(), filteredList);
+            recyclerView.setAdapter(adapter);
+            Toast.makeText(getActivity(), "List filtered !", Toast.LENGTH_SHORT).show();
     }
+
+    /*private void setItemChecked(MenuItem item){
+        item.setChecked(!item.isChecked());
+    }*/
 }
