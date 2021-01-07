@@ -146,7 +146,13 @@ public class MeetingListFragment extends Fragment {
                 filterMeetingList("Room C");
                 return true;
             case R.id.all_room_select_item:
-                filterMeetingList("All");
+                filterMeetingList("All Room");
+                return true;
+            case R.id.today_select_item:
+                filterMeetingList("Today");
+                return true;
+            case R.id.tomorrow_select_item:
+                filterMeetingList("Tomorrow");
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -166,8 +172,14 @@ public class MeetingListFragment extends Fragment {
                 case "Room C":
                     filteredList = MyMethodsApi.selectMeetingInRoomC(meetingList);
                     break;
-                default:
+                case "All Room":
                     filteredList = MyMethodsApi.selectAllMeeting(meetingList);
+                    break;
+                case "Today":
+                    filteredList = MyMethodsApi.selectTodayMeeting(meetingList);
+                    break;
+                default:
+                    filteredList = MyMethodsApi.selectTomorrowMeeting(meetingList);
                     break;
             }
 
