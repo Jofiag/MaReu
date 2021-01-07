@@ -25,7 +25,9 @@ import java.util.List;
 
 public class AddMeetingFragment extends Fragment {
     public static final String MEETING_LIST_CODE = "meeting list";
-    private TextView participantsEmailsText;
+    private TextView participantsEmailsTextView;
+    private TextView dateTextView;
+    private TextView hourTextView;
     private EditText roomEdit;
     private EditText subjectEdit;
     private EditText emailEdit;
@@ -33,6 +35,8 @@ public class AddMeetingFragment extends Fragment {
     private Button saveEmailButton;
     private Button saveMeetingButton;
     private Button showAllMeetingButton;
+    private Button setDateButton;
+    private Button setHourButton;
 
     private final StringBuilder emailText = new StringBuilder();
 
@@ -67,10 +71,14 @@ public class AddMeetingFragment extends Fragment {
         subjectEdit = view.findViewById(R.id.subject_edit_text);
         emailEdit = view.findViewById(R.id.participant_emails_edit_text);
         addParticipantEmailButton = view.findViewById(R.id.add_participant_email_button);
-        participantsEmailsText = view.findViewById(R.id.participants_emails_text_add_fragment);
+        participantsEmailsTextView = view.findViewById(R.id.participants_emails_text_add_fragment);
         saveEmailButton = view.findViewById(R.id.save_participant_button);
         saveMeetingButton = view.findViewById(R.id.save_meeting_button);
         showAllMeetingButton = view.findViewById(R.id.show_meeting_list_button);
+        setDateButton = view.findViewById(R.id.set_date_button);
+        setHourButton = view.findViewById(R.id.set_hour_button);
+        dateTextView = view.findViewById(R.id.meeting_date_text);
+        hourTextView = view.findViewById(R.id.meeting_hour_text);
     }
 
     private void saveMeeting(Context context){
@@ -107,7 +115,7 @@ public class AddMeetingFragment extends Fragment {
             if (!TextUtils.isEmpty(emailEntered) && !emailsList.contains(emailEntered)){
                 emailsList.add(emailEntered);
                 emailText.append(emailEntered).append("\n\n");
-                participantsEmailsText.setText(emailText);
+                participantsEmailsTextView.setText(emailText);
 
                 addParticipantEmailButton.setVisibility(View.VISIBLE);
                 emailEdit.setVisibility(View.GONE);
