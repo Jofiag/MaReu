@@ -1,12 +1,8 @@
 package com.example.mareu;
 
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 
-import com.example.mareu.adapter.MeetingListRecyclerViewAdapter;
-import com.example.mareu.controler.AddMeetingActivity;
 import com.example.mareu.controler.MainActivity;
-import com.example.mareu.fragment.AddMeetingFragment;
 
 import org.junit.Before;
 import org.junit.Rule;
