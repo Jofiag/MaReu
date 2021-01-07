@@ -1,6 +1,7 @@
 package com.example.mareu.fragment;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -41,6 +43,8 @@ public class AddMeetingFragment extends Fragment {
     private final Meeting meeting = new Meeting();
     private List<Meeting> meetingList = new ArrayList<>();
     private final List<String> emailsList = new ArrayList<>();
+
+    private Calendar calendar = Calendar.getInstance();
 
     private int day, month, year, hour, minute;
 
@@ -83,7 +87,7 @@ public class AddMeetingFragment extends Fragment {
 
     private void saveMeeting(Context context){
         setDateButton.setOnClickListener(v -> setDate());
-
+        setHourButton.setOnClickListener(v -> setHour());
         addParticipantEmailButton.setOnClickListener(v -> showParticipantEditText());
 
         saveMeetingButton.setOnClickListener(v -> {
@@ -94,6 +98,8 @@ public class AddMeetingFragment extends Fragment {
             if (fieldsEnteredNotEmpty && !emailsList.isEmpty()){
                 meeting.setPlace(roomEntered);
                 meeting.setSubject(subjectEntered);
+                //meeting.setDate(day + "/" + month + "/" + year);
+                //meeting.setHour(hour + "h" + minute);
                 meeting.setParticipantMailList(emailsList);
 
                 MyMethodsApi.addMeeting(meetingList, meeting);
@@ -108,17 +114,30 @@ public class AddMeetingFragment extends Fragment {
     }
 
     private void setDate(){
-        Calendar calendar = Calendar.getInstance();
+        //Current date
         day = calendar.get(Calendar.DAY_OF_MONTH);
         month = calendar.get(Calendar.MONTH);
         year = calendar.get(Calendar.YEAR);
 
+        //DatePicker
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
             DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
-                    (view, year, monthOfYear, dayOfMonth) -> dateTextView.setText(MessageFormat.format("{0}-{1}-{2}", dayOfMonth, monthOfYear + 1, year)), year, month, day);
+                    (view, year, monthOfYear, dayOfMonth) -> dateTextView.setText(MessageFormat.format("{0}/{1}/{2}", dayOfMonth, monthOfYear + 1, year)), year, month, day);
 
             datePickerDialog.show();
         }
+    }
+
+    private void setHour(){
+        //Current time
+        hour = calendar.get(Calendar.HOUR_OF_DAY);
+        minute = calendar.get(Calendar.MINUTE);
+
+        //Time picker
+        TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(),
+                (view, hourOfDay, minute) -> hourTextView.setText(MessageFormat.format("{0}h{1}", hourOfDay, minute)), hour, minute, true);
+
+        timePickerDialog.show();
     }
 
     private void showParticipantEditText(){
