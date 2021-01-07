@@ -48,7 +48,7 @@ public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<Meeting
         Meeting meeting = meetingList.get(position);
 
         int[] colorTable = {Color.YELLOW, Color.GREEN, Color.GRAY, Color.BLUE, Color.BLACK, Color.WHITE, Color.MAGENTA};
-        String details = meeting.getSubject() + " - " + " - " + meeting.getPlace();
+        String details = meeting.getSubject() + " - " + meeting.getHour() + " - " + meeting.getPlace();
         StringBuilder emailsText = new StringBuilder();
         List<String> emailList = meeting.getParticipantMailList();
         for (int i = 0; i < emailList.size(); i++) {
