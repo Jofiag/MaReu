@@ -95,7 +95,6 @@ public class AddMeetingFragment extends Fragment {
             if (fieldsEnteredNotEmpty && !emailsList.isEmpty()){
                 meeting.setPlace(roomEntered);
                 meeting.setSubject(subjectEntered);
-                meeting.setDate(day + "/" + month + "/" + year);
                 meeting.setHour(hour + "h" + minute);
                 meeting.setParticipantMailList(emailsList);
 

@@ -6,17 +6,15 @@ import java.util.List;
 public class Meeting implements Serializable {
     private String place;
     private String subject;
-    private String date;
     private String hour;
     private List<String> participantMailList;
 
     public Meeting() {
     }
 
-    public Meeting(String place, String subject, String date, String hour, List<String> participantMailList) {
+    public Meeting(String place, String subject, String hour, List<String> participantMailList) {
         this.place = place;
         this.subject = subject;
-        this.date = date;
         this.hour = hour;
         this.participantMailList = participantMailList;
     }
@@ -35,14 +33,6 @@ public class Meeting implements Serializable {
 
     public void setSubject(String subject) {
         this.subject = subject;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
     }
 
     public String getHour() {
