@@ -1,5 +1,6 @@
 package com.example.mareu.fragment;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,10 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.mareu.R;
@@ -20,29 +23,26 @@ import com.example.mareu.controler.MainActivity;
 import com.example.mareu.model.Meeting;
 
 import java.io.Serializable;
+import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class AddMeetingFragment extends Fragment {
     public static final String MEETING_LIST_CODE = "meeting list";
-    private TextView participantsEmailsTextView;
-    private TextView dateTextView;
-    private TextView hourTextView;
+    private TextView participantsEmailsTextView, dateTextView, hourTextView;
     private EditText roomEdit;
     private EditText subjectEdit;
     private EditText emailEdit;
-    private Button addParticipantEmailButton;
-    private Button saveEmailButton;
-    private Button saveMeetingButton;
-    private Button showAllMeetingButton;
-    private Button setDateButton;
-    private Button setHourButton;
+    private Button addParticipantEmailButton, saveEmailButton, saveMeetingButton, showAllMeetingButton, setDateButton, setHourButton;
 
     private final StringBuilder emailText = new StringBuilder();
 
     private final Meeting meeting = new Meeting();
     private List<Meeting> meetingList = new ArrayList<>();
     private final List<String> emailsList = new ArrayList<>();
+
+    private int day, month, year, hour, minute;
 
     public AddMeetingFragment() {
     }
@@ -82,6 +82,8 @@ public class AddMeetingFragment extends Fragment {
     }
 
     private void saveMeeting(Context context){
+        setDateButton.setOnClickListener(v -> setDate());
+
         addParticipantEmailButton.setOnClickListener(v -> showParticipantEditText());
 
         saveMeetingButton.setOnClickListener(v -> {
@@ -103,6 +105,20 @@ public class AddMeetingFragment extends Fragment {
             else
                 Toast.makeText(context, "You must enter at least one participant !", Toast.LENGTH_SHORT).show();
         });
+    }
+
+    private void setDate(){
+        Calendar calendar = Calendar.getInstance();
+        day = calendar.get(Calendar.DAY_OF_MONTH);
+        month = calendar.get(Calendar.MONTH);
+        year = calendar.get(Calendar.YEAR);
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
+                    (view, year, monthOfYear, dayOfMonth) -> dateTextView.setText(MessageFormat.format("{0}-{1}-{2}", dayOfMonth, monthOfYear + 1, year)), year, month, day);
+
+            datePickerDialog.show();
+        }
     }
 
     private void showParticipantEditText(){
