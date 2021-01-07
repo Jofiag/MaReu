@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mareu.MeetingDatabase;
 import com.example.mareu.R;
 import com.example.mareu.adapter.MeetingListRecyclerViewAdapter;
+import com.example.mareu.api.MyMethodsApi;
 import com.example.mareu.controler.AddMeetingActivity;
 import com.example.mareu.model.Meeting;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -109,7 +110,7 @@ public class MeetingListFragment extends Fragment {
     }
 
     private void sortListByPlace(){
-        Collections.sort(meetingList, (meeting1, meeting2) -> meeting1.getPlace().compareTo(meeting2.getPlace()));
+        MyMethodsApi.sortMeetingListByPlace(meetingList);
         adapter.notifyDataSetChanged();
         Toast.makeText(getActivity(), "List sorted !", Toast.LENGTH_SHORT).show();
     }

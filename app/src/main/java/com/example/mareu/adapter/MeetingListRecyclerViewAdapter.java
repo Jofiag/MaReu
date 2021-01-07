@@ -6,15 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.mareu.MeetingDatabase;
 import com.example.mareu.R;
-import com.example.mareu.api.CrudMeetingApi;
+import com.example.mareu.api.MyMethodsApi;
 import com.example.mareu.model.Meeting;
 
 import java.util.ArrayList;
@@ -65,7 +63,7 @@ public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<Meeting
         holder.participantsEmailsText.setText(emailsText.toString());
         holder.deleteImageButton.setOnClickListener(v -> {
             if (meetingList.contains(meeting))
-                CrudMeetingApi.deleteMeeting(meetingList, meeting);
+                MyMethodsApi.deleteMeeting(meetingList, meeting);
             notifyDataSetChanged();
         });
         holder.itemView.setOnClickListener(v -> mCallback.onMeetingSelected(meeting));
