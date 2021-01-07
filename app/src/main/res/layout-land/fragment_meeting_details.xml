@@ -111,7 +111,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/subject_detail_text"
-        android:layout_marginStart="57dp"
+        android:layout_marginStart="63dp"
         android:layout_toEndOf="@+id/textView7"
         android:gravity="center_horizontal"
         android:text="@string/jo_fr_text" />
