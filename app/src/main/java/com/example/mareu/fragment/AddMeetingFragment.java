@@ -10,13 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.mareu.R;
@@ -44,7 +41,7 @@ public class AddMeetingFragment extends Fragment {
     private List<Meeting> meetingList = new ArrayList<>();
     private final List<String> emailsList = new ArrayList<>();
 
-    private Calendar calendar = Calendar.getInstance();
+    private final Calendar calendar = Calendar.getInstance();
 
     private int day, month, year, hour, minute;
 

@@ -18,9 +18,9 @@ public class MeetingDatabase {
     }
 
     public List<Meeting> initiateMeetingList(){
-        Meeting meeting1 = new Meeting("Room A", "Finance", 1, 0, Arrays.asList("jo@gmail.com", "fi@gmail.com", "ag@gmail.com"));
-        Meeting meeting2 = new Meeting("Room B", "Economy", 1, 0, Arrays.asList("fi@gmail.com", "gn@gmail.com", "on@gmail.com"));
-        Meeting meeting3 = new Meeting("Room C", "Politic", 1, 0, Arrays.asList("ah@gmail.com", "ab@gmail.com"));
+        Meeting meeting1 = new Meeting("Room A", "Finance", "31/01/2021", "10h30", Arrays.asList("jo@gmail.com", "fi@gmail.com", "ag@gmail.com"));
+        Meeting meeting2 = new Meeting("Room B", "Economy", "31/01/2021", "10h30", Arrays.asList("fi@gmail.com", "gn@gmail.com", "on@gmail.com"));
+        Meeting meeting3 = new Meeting("Room C", "Politic", "31/01/2021", "10h30", Arrays.asList("ah@gmail.com", "ab@gmail.com"));
         meetingList.add(meeting1);
         meetingList.add(meeting2);
         meetingList.add(meeting3);

@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements MeetingListRecycl
         if (bundle != null)
             meetingList = (List<Meeting>) bundle.getSerializable(MEETING_LIST_CODE);
         else
-            meetingList = MeetingDatabase.getInstance().getMeetingList();
+            meetingList = MeetingDatabase.getInstance().initiateMeetingList();
     }
 
     private void attachNewFragment(Fragment newFragment, int container) {
