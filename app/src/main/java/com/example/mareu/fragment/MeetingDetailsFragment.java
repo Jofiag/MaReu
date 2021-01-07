@@ -44,7 +44,6 @@ public class MeetingDetailsFragment extends Fragment {
 
     private void showMeetingDetails(View view, Meeting meeting){
         TextView roomText = view.findViewById(R.id.room_detail_text);
-        TextView timeText = view.findViewById(R.id.time_detail_text);
         TextView subjectText = view.findViewById(R.id.subject_detail_text);
         TextView participantsEmailsText = view.findViewById(R.id.emails_detail_text);
 
@@ -58,7 +57,6 @@ public class MeetingDetailsFragment extends Fragment {
         }
 
         roomText.setText(meeting.getPlace());
-        timeText.setText(meeting.getTime());
         subjectText.setText(meeting.getSubject());
         participantsEmailsText.setText(emailsText);
     }
