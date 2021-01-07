@@ -4,27 +4,21 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Meeting implements Serializable {
-    private String time;
     private String place;
     private String subject;
+    private int date;
+    private int hour;
     private List<String> participantMailList;
 
     public Meeting() {
     }
 
-    public Meeting(String time, String place, String subject, List<String> participantMailList) {
-        this.time = time;
+    public Meeting(String place, String subject, int date, int hour, List<String> participantMailList) {
         this.place = place;
         this.subject = subject;
+        this.date = date;
+        this.hour = hour;
         this.participantMailList = participantMailList;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
     }
 
     public String getPlace() {
@@ -43,21 +37,27 @@ public class Meeting implements Serializable {
         this.subject = subject;
     }
 
+    public int getDate() {
+        return date;
+    }
+
+    public void setDate(int date) {
+        this.date = date;
+    }
+
+    public int getHour() {
+        return hour;
+    }
+
+    public void setHour(int hour) {
+        this.hour = hour;
+    }
+
     public List<String> getParticipantMailList() {
         return participantMailList;
     }
 
     public void setParticipantMailList(List<String> participantMailList) {
         this.participantMailList = participantMailList;
-    }
-
-    @Override
-    public String toString() {
-        return "Meeting{" +
-                "time='" + time + '\'' +
-                ", place='" + place + '\'' +
-                ", subject='" + subject + '\'' +
-                ", participantMailList=" + participantMailList +
-                '}';
     }
 }

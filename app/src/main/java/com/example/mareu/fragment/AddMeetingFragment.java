@@ -27,7 +27,6 @@ public class AddMeetingFragment extends Fragment {
     public static final String MEETING_LIST_CODE = "meeting list";
     private TextView participantsEmailsText;
     private EditText roomEdit;
-    private EditText timeEdit;
     private EditText subjectEdit;
     private EditText emailEdit;
     private Button addParticipantEmailButton;
@@ -65,7 +64,6 @@ public class AddMeetingFragment extends Fragment {
 
     private void setReferences(View view){
         roomEdit = view.findViewById(R.id.room_edit_text);
-        timeEdit = view.findViewById(R.id.time_edit_text);
         subjectEdit = view.findViewById(R.id.subject_edit_text);
         emailEdit = view.findViewById(R.id.participant_emails_edit_text);
         addParticipantEmailButton = view.findViewById(R.id.add_participant_email_button);
@@ -80,13 +78,11 @@ public class AddMeetingFragment extends Fragment {
 
         saveMeetingButton.setOnClickListener(v -> {
             String roomEntered = roomEdit.getText().toString().trim();
-            String timeEntered = timeEdit.getText().toString().trim();
             String subjectEntered = subjectEdit.getText().toString().trim();
-            boolean fieldsEnteredNotEmpty = !TextUtils.isEmpty(roomEntered) && !TextUtils.isEmpty(timeEntered) && !TextUtils.isEmpty(subjectEntered);
+            boolean fieldsEnteredNotEmpty = !TextUtils.isEmpty(roomEntered) && !TextUtils.isEmpty(subjectEntered);
 
             if (fieldsEnteredNotEmpty && !emailsList.isEmpty()){
                 meeting.setPlace(roomEntered);
-                meeting.setTime(timeEntered);
                 meeting.setSubject(subjectEntered);
                 meeting.setParticipantMailList(emailsList);
 
