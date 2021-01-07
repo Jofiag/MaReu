@@ -22,7 +22,9 @@
     <string name="save_email_text">Save email</string>
     <string name="show_all_meeting_text">SHOW ALL MEETING</string>
     <string name="sort_by_text">Sort by</string>
-    <string name="date_text">date : </string>
+    <string name="date_text">date</string>
+    <string name="hour_text">hour</string>
     <string name="name_text">name</string>
-    <string name="hour_text">Hour :</string>
+    <string name="set_date_text">SET DATE</string>
+    <string name="set_hour_text">set hour</string>
 </resources>

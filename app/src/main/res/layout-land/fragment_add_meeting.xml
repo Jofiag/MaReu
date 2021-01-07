@@ -52,21 +52,49 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/participant_emails_edit_text"
+            android:layout_marginStart="37dp"
             android:layout_marginTop="7dp"
             android:layout_marginBottom="7dp"
+            android:layout_toEndOf="@+id/set_date_button"
             android:text="@string/date_text"
             android:textSize="17sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/set_date_button"
+            android:layout_width="wrap_content"
+            android:layout_height="37dp"
+            android:layout_below="@+id/participant_emails_edit_text"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="-13dp"
+            android:layout_marginBottom="7dp"
+            android:background="@android:color/transparent"
+            android:text="@string/set_date_text"
+            android:textColor="@color/purple_500" />
+
+        <Button
+            android:id="@+id/set_hour_button"
+            android:layout_width="wrap_content"
+            android:layout_height="37dp"
+            android:layout_below="@+id/set_date_button"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="-13dp"
+            android:background="@android:color/transparent"
+            android:text="@string/set_hour_text"
+            android:textColor="@color/purple_500" />
 
         <TextView
             android:id="@+id/meeting_hour_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/meeting_date_text"
+            android:layout_marginStart="37dp"
+            android:layout_marginTop="15dp"
             android:layout_marginBottom="17dp"
+            android:layout_toEndOf="@+id/set_hour_button"
             android:text="@string/hour_text"
             android:textSize="17sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/participants_emails_text_add_fragment"
