@@ -20,21 +20,10 @@
         android:inputType="textPersonName" />
 
     <EditText
-        android:id="@+id/time_edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/room_edit_text"
-        android:layout_marginTop="7dp"
-        android:ems="10"
-        android:hint="@string/time_text"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName" />
-
-    <EditText
         android:id="@+id/subject_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/time_edit_text"
+        android:layout_below="@+id/room_edit_text"
         android:layout_marginTop="7dp"
         android:layout_marginBottom="17dp"
         android:ems="10"
@@ -55,11 +44,31 @@
         android:inputType="textPersonName"
         android:visibility="gone" />
 
+    <TextView
+        android:id="@+id/meeting_date_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/participant_emails_edit_text"
+        android:layout_marginBottom="7dp"
+        android:text="@string/date_text"
+        android:textSize="17sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/meeting_hour_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/meeting_date_text"
+        android:layout_marginBottom="17dp"
+        android:text="@string/hour_text"
+        android:textSize="17sp"
+        android:textStyle="bold"/>
+
     <ScrollView
         android:id="@+id/my_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="77dp"
-        android:layout_below="@+id/participant_emails_edit_text">
+        android:layout_below="@+id/meeting_hour_text">
 
         <TextView
             android:id="@+id/participants_emails_text_add_fragment"
