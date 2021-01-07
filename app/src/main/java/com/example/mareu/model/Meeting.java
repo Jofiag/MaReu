@@ -4,18 +4,17 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Meeting implements Serializable {
-    private String place;
-    private String subject;
-    private String hour;
+    private String place, subject, time;
     private List<String> participantMailList;
+    private int day, month, year, hour, minutes;
 
     public Meeting() {
     }
 
-    public Meeting(String place, String subject, String hour, List<String> participantMailList) {
+    public Meeting(String place, String subject, String time, List<String> participantMailList) {
         this.place = place;
         this.subject = subject;
-        this.hour = hour;
+        this.time = time;
         this.participantMailList = participantMailList;
     }
 
@@ -35,12 +34,12 @@ public class Meeting implements Serializable {
         this.subject = subject;
     }
 
-    public String getHour() {
-        return hour;
+    public String getTime() {
+        return time;
     }
 
-    public void setHour(String hour) {
-        this.hour = hour;
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public List<String> getParticipantMailList() {
@@ -49,5 +48,45 @@ public class Meeting implements Serializable {
 
     public void setParticipantMailList(List<String> participantMailList) {
         this.participantMailList = participantMailList;
+    }
+
+    public int getDay() {
+        return day;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public int getHour() {
+        return hour;
+    }
+
+    public void setHour(int hour) {
+        this.hour = hour;
+    }
+
+    public int getMinutes() {
+        return minutes;
+    }
+
+    public void setMinutes(int minutes) {
+        this.minutes = minutes;
     }
 }

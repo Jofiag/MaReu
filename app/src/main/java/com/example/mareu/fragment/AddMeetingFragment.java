@@ -95,8 +95,13 @@ public class AddMeetingFragment extends Fragment {
             if (fieldsEnteredNotEmpty && !emailsList.isEmpty()){
                 meeting.setPlace(roomEntered);
                 meeting.setSubject(subjectEntered);
-                meeting.setHour(hour + "h" + minute);
+                meeting.setTime(hour + "h" + minute);
                 meeting.setParticipantMailList(emailsList);
+                meeting.setDay(day);
+                meeting.setMonth(month);
+                meeting.setYear(year);
+                meeting.setHour(hour);
+                meeting.setMinutes(minute);
 
                 MyMethodsApi.addMeeting(meetingList, meeting);
                 if (meetingList.contains(meeting))
