@@ -64,14 +64,11 @@ public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<Meeting
         holder.someMeetingDetailsText.setText(details);
         holder.participantsEmailsText.setText(emailsText.toString());
         holder.deleteImageButton.setOnClickListener(v -> {
-            if (MeetingDatabase.getInstance().getMeetingList().contains(meeting))
-                CrudMeetingApi.deleteMeeting(meeting);
-            meetingList.remove(meeting);
+            if (meetingList.contains(meeting))
+                CrudMeetingApi.deleteMeeting(meetingList, meeting);
             notifyDataSetChanged();
         });
-        holder.itemView.setOnClickListener(v -> {
-            mCallback.onMeetingSelected(meeting);
-        });
+        holder.itemView.setOnClickListener(v -> mCallback.onMeetingSelected(meeting));
     }
 
     @Override

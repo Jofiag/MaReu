@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import com.example.mareu.R;
+import com.example.mareu.api.CrudMeetingApi;
 import com.example.mareu.controler.MainActivity;
 import com.example.mareu.model.Meeting;
 
@@ -89,7 +90,7 @@ public class AddMeetingFragment extends Fragment {
                 meeting.setSubject(subjectEntered);
                 meeting.setParticipantMailList(emailsList);
 
-                meetingList.add(meeting);
+                CrudMeetingApi.addMeeting(meetingList, meeting);
                 if (meetingList.contains(meeting))
                     Toast.makeText(context, "Meeting saved !", Toast.LENGTH_SHORT).show();
             }

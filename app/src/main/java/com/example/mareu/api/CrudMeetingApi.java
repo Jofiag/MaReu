@@ -8,14 +8,13 @@ import java.util.List;
 
 public class CrudMeetingApi {
     private static final MeetingDatabase db = MeetingDatabase.getInstance();
-    private static final List<Meeting> meetingList = db.getMeetingList();
 
-    public static void addMeeting(Meeting meeting){
+    public static void addMeeting(List<Meeting> meetingList, Meeting meeting){
         meetingList.add(meeting);
         db.setMeetingList(meetingList);
     }
 
-    public static void deleteMeeting(Meeting meeting){
+    public static void deleteMeeting(List<Meeting> meetingList, Meeting meeting){
         meetingList.remove(meeting);
         db.setMeetingList(meetingList);
     }
