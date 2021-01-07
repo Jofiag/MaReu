@@ -12,14 +12,14 @@
         android:id="@+id/meeting_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="53dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="87dp"
         android:layout_marginEnd="87dp"
+        android:layout_marginBottom="17dp"
         android:gravity="center_horizontal"
         android:text="@string/meeting_text"
-        android:textSize="47sp" />
+        android:textSize="37sp" />
 
 
     <TextView
@@ -27,83 +27,102 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/meeting_title"
+        android:layout_marginBottom="7dp"
         android:text="@string/Room_text"
-        android:textSize="27sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textSize="23sp"/>
 
     <TextView
         android:id="@+id/room_detail_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/meeting_title"
-        android:layout_marginStart="57dp"
+        android:layout_marginStart="189dp"
+        android:layout_marginBottom="7dp"
         android:layout_toEndOf="@+id/textView"
         android:text="@string/room_lambda_text"
-        android:textSize="27sp"/>
+        android:textSize="23sp"/>
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView"
+        android:layout_marginBottom="7dp"
+        android:text="@string/Date_text"
+        android:textStyle="bold"
+        android:textSize="23sp"/>
+
+    <TextView
+        android:id="@+id/date_detail_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/room_detail_text"
+        android:layout_marginStart="203dp"
+        android:layout_marginBottom="7dp"
+        android:layout_toEndOf="@+id/textView6"
+        android:text="@string/_01_01_2022_text"
+        android:textSize="23sp"/>
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView"
-        android:layout_marginTop="37dp"
+        android:layout_below="@+id/textView6"
+        android:layout_marginBottom="7dp"
         android:text="@string/time_text"
-        android:textSize="27sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textSize="23sp"/>
 
     <TextView
         android:id="@+id/time_detail_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/room_detail_text"
-        android:layout_marginStart="57dp"
-        android:layout_marginTop="37dp"
+        android:layout_below="@+id/date_detail_text_view"
+        android:layout_marginStart="197dp"
+        android:layout_marginBottom="7dp"
         android:layout_toEndOf="@+id/textView3"
         android:text="@string/seven_pm_text"
-        android:textSize="27sp" />
+        android:textSize="23sp"/>
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView3"
-        android:layout_marginTop="37dp"
+        android:layout_marginBottom="7dp"
         android:text="@string/subject_text"
-        android:textSize="27sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textSize="23sp"/>
 
     <TextView
         android:id="@+id/subject_detail_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/time_detail_text"
-        android:layout_marginStart="57dp"
-        android:layout_marginTop="37dp"
+        android:layout_marginStart="171dp"
+        android:layout_marginBottom="7dp"
         android:layout_toEndOf="@+id/textView5"
         android:text="@string/subject_lambda_text"
-        android:textSize="27sp" />
+        android:textSize="23sp" />
 
     <TextView
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView5"
-        android:layout_marginTop="37dp"
         android:text="@string/participants_emails_text"
-        android:textSize="27sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textSize="23sp" />
 
     <TextView
         android:id="@+id/emails_detail_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView7"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="87dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="87dp"
+        android:layout_below="@+id/subject_detail_text"
+        android:layout_marginStart="67dp"
+        android:layout_toEndOf="@+id/textView7"
+        android:gravity="center_horizontal"
         android:text="@string/jo_fr_text"
-        android:textSize="27sp"
-        android:gravity="center_horizontal"/>
+        android:textSize="23sp" />
 </RelativeLayout>
