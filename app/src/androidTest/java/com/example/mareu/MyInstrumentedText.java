@@ -19,17 +19,20 @@ import org.junit.Test;
 import java.util.Calendar;
 
 import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.Espresso.openContextualActionModeOverflowMenu;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 public class MyInstrumentedText {
-    private String subject1, subject2, email1, email2;
-    private int currentDay, tomorrow, currentMonth, currentYear;
+    private String subject1, email1;
+    private String roomFilterText, dateFilterText, roomAText, allRoomText, tomorrowText;
+    private int currentDay, currentMonth, currentYear;
     private int hour, minute;
-    private int roomASwitchId, roomBSwitchId, roomCSwitchId;
+    private int roomASwitchId;
     private int defaultRecyclerViewSize;
 
     @Rule
@@ -41,13 +44,16 @@ public class MyInstrumentedText {
 
         //Specifying some valid variable
         subject1 = "Android";
-        subject2 = "iOS";
 
         email1 = "jofiag@gmail.com";
-        email2 = "pierre@yahoo.fr";
+
+        roomFilterText = "Room filter";
+        dateFilterText = "Date filter";
+        roomAText = "Room A";
+        allRoomText = "All Room";
+        tomorrowText = "Tomorrow";
 
         currentDay = calendar.get(Calendar.DAY_OF_MONTH);
-        tomorrow = currentDay + 1;
         currentMonth = calendar.get(Calendar.MONTH);
         currentYear = calendar.get(Calendar.YEAR);
 
@@ -55,8 +61,6 @@ public class MyInstrumentedText {
         minute = 30;
 
         roomASwitchId = R.id.room_a_switch;
-        roomBSwitchId = R.id.room_b_switch;
-        roomCSwitchId = R.id.room_c_switch;
 
         defaultRecyclerViewSize = 3;
     }
@@ -87,26 +91,29 @@ public class MyInstrumentedText {
 
     @Test
     public void filterMeetingListIsSuccessful(){
-        addMeetingProcess(subject1, email1, currentDay, roomCSwitchId);
-        addMeetingProcess(subject2, email2, tomorrow, roomBSwitchId);
-
         //Check if the recyclerView contains 3 element
         checkRecyclerViewItemCount(defaultRecyclerViewSize);
 
+
         //filter with one room process (select meeting in room A)
+        filterProcess(roomFilterText, roomAText);
 
         //Check if the recyclerView contains 1 element
         checkRecyclerViewItemCount(1);
 
+
         //filter with allRoom/allDate process (select all meeting)
+        filterProcess(roomFilterText, allRoomText);
 
         //Check if the recyclerView contains 3 element
         checkRecyclerViewItemCount(defaultRecyclerViewSize);
 
+
         //filter with one date process (select tomorrow meeting)
+        filterProcess(dateFilterText, tomorrowText);
 
         //Check if the recyclerView contains 2 element
-        checkRecyclerViewItemCount(2);
+        checkRecyclerViewItemCount(1);
     }
 
     private void checkRecyclerViewItemCount(int countExpected){
@@ -153,6 +160,12 @@ public class MyInstrumentedText {
     private void deleteMeetingProcess(){
         //Click on the delete button of the third item (delete the third meeting)
         onView(withId(R.id.my_recyclerview)).perform(RecyclerViewActions.actionOnItemAtPosition(2, MyViewAction.clickChildViewWithId(R.id.delete_image_button)));
+    }
+
+    private void filterProcess(String typeOfStatus, String status){
+        openContextualActionModeOverflowMenu();         //Open the menu
+        onView(withText(typeOfStatus)).perform(click());
+        onView(withText(status)).perform(click());
     }
 
 }
