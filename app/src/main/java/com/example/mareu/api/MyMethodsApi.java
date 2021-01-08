@@ -60,10 +60,6 @@ public class MyMethodsApi{
         return filteredList;
     }
 
-    public static List<Meeting> selectAllMeeting(List<Meeting> meetingList){
-        return meetingList;
-    }
-
     public static List<Meeting> selectTodayMeeting(List<Meeting> meetingList){
         List<Meeting> filteredList = new ArrayList<>();
 

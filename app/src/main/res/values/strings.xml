@@ -38,4 +38,5 @@
     <string name="tomorrow_text">Tomorrow</string>
     <string name="room_filter_text">Room filter</string>
     <string name="date_filter_text">Date filter</string>
+    <string name="all_date_text">All Date</string>
 </resources>

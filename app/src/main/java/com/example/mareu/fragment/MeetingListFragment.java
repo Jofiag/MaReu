@@ -37,6 +37,7 @@ public class MeetingListFragment extends Fragment {
     public static final String ROOM_C = "Room C";
     public static final String ROOM_B = "Room B";
     public static final String ROOM_A = "Room A";
+    public static final String ALL_DATE = "All Date";
     private List<Meeting> meetingList = new ArrayList<>();
     private RecyclerView recyclerView;
     private MeetingListRecyclerViewAdapter adapter;
@@ -151,6 +152,8 @@ public class MeetingListFragment extends Fragment {
             filterMeetingList(TODAY);
         else if (item.getItemId() == R.id.tomorrow_select_item)
             filterMeetingList(TOMORROW);
+        else if (item.getItemId() == R.id.all_date_select_item)
+            filterMeetingList(ALL_DATE);
 
         return super.onOptionsItemSelected(item);
     }
@@ -167,9 +170,6 @@ public class MeetingListFragment extends Fragment {
                 break;
             case ROOM_C:
                 filteredList = MyMethodsApi.selectMeetingInRoomC(meetingList);
-                break;
-            case ALL_ROOM:
-                filteredList = MyMethodsApi.selectAllMeeting(meetingList);
                 break;
             case TODAY:
                 filteredList = MyMethodsApi.selectTodayMeeting(meetingList);

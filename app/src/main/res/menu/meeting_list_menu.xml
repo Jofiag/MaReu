@@ -28,6 +28,8 @@
                     android:title="@string/today_text"/>
                 <item android:id="@+id/tomorrow_select_item"
                     android:title="@string/tomorrow_text"/>
+                <item android:id="@+id/all_date_select_item"
+                    android:title="@string/all_date_text"/>
             </group>
         </menu>
     </item>
