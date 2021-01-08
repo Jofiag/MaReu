@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,7 +55,7 @@ public class AddMeetingFragment extends Fragment {
         setReferences(view);
         setSwitchChecked();
         saveMeeting(context);
-        showAllMeeting();
+        showAllMeetingButton.setOnClickListener(v -> showAllMeeting());
 
         return view;
     }
@@ -99,9 +98,10 @@ public class AddMeetingFragment extends Fragment {
                 meeting.setParticipantMailList(emailsList);
 
                 MyMethodsApi.addMeeting(meetingList, meeting);
-                if (meetingList.contains(meeting))
-                    Toast.makeText(context, "Meeting saved !" + meeting.getDay() + "/" + meeting.getMonth() + "/" + meeting.getYear(), Toast.LENGTH_SHORT).show();
-                Log.d("Meeting", "saveMeeting: " + meeting.getDay() + "/" + meeting.getMonth() + "/" + meeting.getYear());
+                if (meetingList.contains(meeting)) {
+                    Toast.makeText(context, "Meeting saved !", Toast.LENGTH_SHORT).show();
+                    showAllMeeting();
+                }
             }
             else if (!fieldsEnteredNotEmpty)
                 Toast.makeText(context, "Empty field are not allowed !", Toast.LENGTH_SHORT).show();
@@ -205,7 +205,6 @@ public class AddMeetingFragment extends Fragment {
     private void showAllMeeting(){
         Intent intent = new Intent(getActivity(), MainActivity.class);
         intent.putExtra(MEETING_LIST_CODE, (Serializable) meetingList);
-
-        showAllMeetingButton.setOnClickListener(v -> startActivity(intent));
+        startActivity(intent);
     }
 }
