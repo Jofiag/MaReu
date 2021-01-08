@@ -53,7 +53,7 @@
         android:layout_height="37dp"
         android:layout_below="@+id/participant_emails_edit_text"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="-13dp"
+        android:layout_marginStart="0dp"
         android:layout_marginBottom="7dp"
         android:background="@android:color/transparent"
         android:text="@string/set_date_text"
@@ -65,7 +65,7 @@
         android:layout_height="37dp"
         android:layout_below="@+id/set_date_button"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="-13dp"
+        android:layout_marginStart="0dp"
         android:background="@android:color/transparent"
         android:text="@string/set_hour_text"
         android:textColor="@color/purple_500" />
