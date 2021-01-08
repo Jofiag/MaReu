@@ -4,10 +4,12 @@ import android.widget.DatePicker;
 import android.widget.TimePicker;
 
 import androidx.test.espresso.contrib.PickerActions;
+import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 
 import com.example.mareu.controler.MainActivity;
 import com.example.mareu.utils.AssertRecyclerItemCount;
+import com.example.mareu.utils.MyViewAction;
 
 import org.hamcrest.Matchers;
 import org.junit.Before;
@@ -149,7 +151,8 @@ public class MyInstrumentedText {
     }
 
     private void deleteMeetingProcess(){
-
+        //Click on the delete button of the third item (delete the third meeting)
+        onView(withId(R.id.my_recyclerview)).perform(RecyclerViewActions.actionOnItemAtPosition(2, MyViewAction.clickChildViewWithId(R.id.delete_image_button)));
     }
 
 }
