@@ -44,8 +44,6 @@ public class AddMeetingFragment extends Fragment {
 
     private final Calendar calendar = Calendar.getInstance();
 
-    private String roomChosen = "";
-
     public AddMeetingFragment() {
     }
 
