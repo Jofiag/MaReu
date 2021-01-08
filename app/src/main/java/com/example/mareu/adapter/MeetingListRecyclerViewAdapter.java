@@ -15,7 +15,6 @@ import com.example.mareu.R;
 import com.example.mareu.api.MyMethodsApi;
 import com.example.mareu.model.Meeting;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -26,13 +25,11 @@ public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<Meeting
         void onMeetingSelected(Meeting meeting);
     }
 
-    private List<Meeting> meetingList = new ArrayList<>();
-    private Context context;
-    private OnMeetingClickListener mCallback;
+    private final List<Meeting> meetingList;
+    private final OnMeetingClickListener mCallback;
 
     public MeetingListRecyclerViewAdapter(Context context, List<Meeting> meetingList) {
         this.meetingList = meetingList;
-        this.context = context;
         this.mCallback = (OnMeetingClickListener) context;
     }
 

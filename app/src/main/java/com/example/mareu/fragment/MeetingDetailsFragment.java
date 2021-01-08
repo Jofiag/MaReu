@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.example.mareu.R;
 import com.example.mareu.model.Meeting;
 
+import java.text.MessageFormat;
 import java.util.List;
 
 import static com.example.mareu.controler.MainActivity.MEETING_SELECTED_CODE;
@@ -43,6 +44,8 @@ public class MeetingDetailsFragment extends Fragment {
     }
 
     private void showMeetingDetails(View view, Meeting meeting){
+        TextView dateText = view.findViewById(R.id.date_detail_text_view);
+        TextView timeText = view.findViewById(R.id.time_detail_text);
         TextView roomText = view.findViewById(R.id.room_detail_text);
         TextView subjectText = view.findViewById(R.id.subject_detail_text);
         TextView participantsEmailsText = view.findViewById(R.id.emails_detail_text);
@@ -56,6 +59,8 @@ public class MeetingDetailsFragment extends Fragment {
                 emailsText.append("\n").append(emailList.get(i));
         }
 
+        dateText.setText(MessageFormat.format("{0}/{1}/{2}", meeting.getDay(), meeting.getMonth(), meeting.getYear()));
+        timeText.setText(MessageFormat.format("{0}h{1}", meeting.getHour(), meeting.getMinutes()));
         roomText.setText(meeting.getPlace());
         subjectText.setText(meeting.getSubject());
         participantsEmailsText.setText(emailsText);
