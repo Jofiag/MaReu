@@ -24,11 +24,8 @@ import com.example.mareu.controler.AddMeetingActivity;
 import com.example.mareu.model.Meeting;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.example.mareu.fragment.AddMeetingFragment.MEETING_LIST_CODE;
 
 public class MeetingListFragment extends Fragment {
     public static final String TOMORROW = "Tomorrow";
