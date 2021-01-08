@@ -11,10 +11,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.mareu.R;
@@ -28,11 +30,16 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import static com.example.mareu.fragment.MeetingListFragment.ROOM_A;
+import static com.example.mareu.fragment.MeetingListFragment.ROOM_B;
+import static com.example.mareu.fragment.MeetingListFragment.ROOM_C;
+
 public class AddMeetingFragment extends Fragment {
     public static final String MEETING_LIST_CODE = "meeting list";
     private TextView participantsEmailsTextView, dateTextView, hourTextView;
-    private EditText roomEdit, subjectEdit, emailEdit;
+    private EditText subjectEdit, emailEdit;
     private Button addParticipantEmailButton, saveEmailButton, saveMeetingButton, showAllMeetingButton, setDateButton, setHourButton;
+    private SwitchCompat roomASwitch, roomBSwitch, roomCSwitch;
 
     private final StringBuilder emailText = new StringBuilder();
 
@@ -65,7 +72,6 @@ public class AddMeetingFragment extends Fragment {
     }
 
     private void setReferences(View view){
-        roomEdit = view.findViewById(R.id.room_edit_text);
         subjectEdit = view.findViewById(R.id.subject_edit_text);
         emailEdit = view.findViewById(R.id.participant_emails_edit_text);
         addParticipantEmailButton = view.findViewById(R.id.add_participant_email_button);
@@ -77,6 +83,9 @@ public class AddMeetingFragment extends Fragment {
         setHourButton = view.findViewById(R.id.set_hour_button);
         dateTextView = view.findViewById(R.id.meeting_date_text);
         hourTextView = view.findViewById(R.id.meeting_hour_text);
+        roomASwitch = view.findViewById(R.id.room_a_switch);
+        roomBSwitch = view.findViewById(R.id.room_b_switch);
+        roomCSwitch = view.findViewById(R.id.room_c_switch);
     }
 
     private void saveMeeting(Context context){
@@ -85,12 +94,12 @@ public class AddMeetingFragment extends Fragment {
         addParticipantEmailButton.setOnClickListener(v -> showParticipantEditText());
 
         saveMeetingButton.setOnClickListener(v -> {
-            String roomEntered = roomEdit.getText().toString().trim();
+            String roomChosen = setSwitchCheckedAndGetRoomChosen();
             String subjectEntered = subjectEdit.getText().toString().trim();
-            boolean fieldsEnteredNotEmpty = !TextUtils.isEmpty(roomEntered) && !TextUtils.isEmpty(subjectEntered);
+            boolean fieldsEnteredNotEmpty = !TextUtils.isEmpty(subjectEntered);
 
             if (fieldsEnteredNotEmpty && !emailsList.isEmpty()){
-                meeting.setPlace(roomEntered);
+                meeting.setPlace(roomChosen);
                 meeting.setSubject(subjectEntered);
                 meeting.setParticipantMailList(emailsList);
 
@@ -104,6 +113,51 @@ public class AddMeetingFragment extends Fragment {
             else
                 Toast.makeText(context, "You must enter at least one participant !", Toast.LENGTH_SHORT).show();
         });
+    }
+
+    private String setSwitchCheckedAndGetRoomChosen(){
+        final boolean[] isRoomA = {false};
+        final boolean[] isRoomB = {false};
+        final boolean[] isRoomC = {false};
+
+        roomASwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked){
+                roomBSwitch.setChecked(false);
+                roomCSwitch.setChecked(false);
+                isRoomA[0] = true;
+                isRoomB[0] = false;
+                isRoomC[0] = false;
+            }
+        });
+
+        roomBSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked){
+                roomASwitch.setChecked(false);
+                roomCSwitch.setChecked(false);
+                isRoomA[0] = false;
+                isRoomB[0] = true;
+                isRoomC[0] = false;
+            }
+        });
+
+        roomCSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked){
+                roomASwitch.setChecked(false);
+                roomBSwitch.setChecked(false);
+                isRoomA[0] = false;
+                isRoomB[0] = false;
+                isRoomC[0] = true;
+            }
+        });
+
+        if (isRoomA[0])
+            return ROOM_A;
+        else if (isRoomB[0])
+            return ROOM_B;
+        else if (isRoomC[0])
+            return ROOM_C;
+
+        return null;
     }
 
     private void setDate(){
