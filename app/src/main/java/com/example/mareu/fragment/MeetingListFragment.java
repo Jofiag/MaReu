@@ -38,6 +38,7 @@ public class MeetingListFragment extends Fragment {
     public static final String ROOM_B = "Room B";
     public static final String ROOM_A = "Room A";
     public static final String ALL_DATE = "All Date";
+
     private List<Meeting> meetingList = new ArrayList<>();
     private RecyclerView recyclerView;
     private MeetingListRecyclerViewAdapter adapter;
@@ -56,21 +57,12 @@ public class MeetingListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list_meeting, container, false);
 
-        getMeetingList();
+        meetingList = MeetingDatabase.getInstance().getMeetingList();
         setReference(view);
         setRecyclerView(view);
         startAddMeetingActivity(view);
 
         return view;
-    }
-
-    private void getMeetingList() {
-        Bundle bundle = getArguments();
-
-        if (bundle != null)
-            meetingList = (List<Meeting>) bundle.getSerializable(MEETING_LIST_CODE);
-        else
-            meetingList = MeetingDatabase.getInstance().getMeetingList();
     }
 
     private void setReference(View view){
@@ -89,7 +81,6 @@ public class MeetingListFragment extends Fragment {
 
     private void startAddMeetingActivity(View view){
         Intent intent = new Intent(view.getContext(), AddMeetingActivity.class);
-        intent.putExtra(MEETING_LIST_CODE, (Serializable) meetingList);
 
         fab.setOnClickListener(v -> {
             startActivity(intent);

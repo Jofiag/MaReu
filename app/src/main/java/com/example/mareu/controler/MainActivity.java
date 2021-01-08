@@ -30,16 +30,14 @@ public class MainActivity extends AppCompatActivity implements MeetingListRecycl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getMeetingListFromAddMeetingActivity();
+        getMeetingList();
         attachMeetingListFragment();
         setDualPane();
     }
 
-    private void getMeetingListFromAddMeetingActivity() {
-        Bundle bundle = getIntent().getExtras();
-        if (bundle != null)
-            meetingList = (List<Meeting>) bundle.getSerializable(MEETING_LIST_CODE);
-        else
+    private void getMeetingList() {
+        meetingList = MeetingDatabase.getInstance().getMeetingList();
+        if (meetingList.isEmpty())
             meetingList = MeetingDatabase.getInstance().initiateMeetingList();
     }
 

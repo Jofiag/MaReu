@@ -17,6 +17,7 @@ import android.widget.Toast;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 
+import com.example.mareu.MeetingDatabase;
 import com.example.mareu.R;
 import com.example.mareu.api.MyMethodsApi;
 import com.example.mareu.controler.MainActivity;
@@ -51,19 +52,13 @@ public class AddMeetingFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_add_meeting, container, false);
         Context context = view.getContext();
 
-        getMeetingList();
+        meetingList = MeetingDatabase.getInstance().getMeetingList();
         setReferences(view);
         setSwitchChecked();
         saveMeeting(context);
         showAllMeetingButton.setOnClickListener(v -> showAllMeeting());
 
         return view;
-    }
-
-    private void getMeetingList() {
-        Bundle bundle = getArguments();
-        if (bundle != null)
-            meetingList = (List<Meeting>) bundle.getSerializable(MEETING_LIST_CODE);
     }
 
     private void setReferences(View view){
