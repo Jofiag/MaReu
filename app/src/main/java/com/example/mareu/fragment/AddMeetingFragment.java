@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,10 +29,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import static com.example.mareu.fragment.MeetingListFragment.ROOM_A;
-import static com.example.mareu.fragment.MeetingListFragment.ROOM_B;
-import static com.example.mareu.fragment.MeetingListFragment.ROOM_C;
-
 public class AddMeetingFragment extends Fragment {
     public static final String MEETING_LIST_CODE = "meeting list";
     private TextView participantsEmailsTextView, dateTextView, hourTextView;
@@ -49,6 +44,8 @@ public class AddMeetingFragment extends Fragment {
 
     private final Calendar calendar = Calendar.getInstance();
 
+    private String roomChosen = "";
+
     public AddMeetingFragment() {
     }
 
@@ -59,6 +56,7 @@ public class AddMeetingFragment extends Fragment {
 
         getMeetingList();
         setReferences(view);
+        setSwitchChecked();
         saveMeeting(context);
         showAllMeeting();
 
@@ -94,12 +92,11 @@ public class AddMeetingFragment extends Fragment {
         addParticipantEmailButton.setOnClickListener(v -> showParticipantEditText());
 
         saveMeetingButton.setOnClickListener(v -> {
-            String roomChosen = setSwitchCheckedAndGetRoomChosen();
             String subjectEntered = subjectEdit.getText().toString().trim();
             boolean fieldsEnteredNotEmpty = !TextUtils.isEmpty(subjectEntered);
 
             if (fieldsEnteredNotEmpty && !emailsList.isEmpty()){
-                meeting.setPlace(roomChosen);
+                setMeetingPlace();
                 meeting.setSubject(subjectEntered);
                 meeting.setParticipantMailList(emailsList);
 
@@ -115,18 +112,11 @@ public class AddMeetingFragment extends Fragment {
         });
     }
 
-    private String setSwitchCheckedAndGetRoomChosen(){
-        final boolean[] isRoomA = {false};
-        final boolean[] isRoomB = {false};
-        final boolean[] isRoomC = {false};
-
+    private void setSwitchChecked(){
         roomASwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked){
                 roomBSwitch.setChecked(false);
                 roomCSwitch.setChecked(false);
-                isRoomA[0] = true;
-                isRoomB[0] = false;
-                isRoomC[0] = false;
             }
         });
 
@@ -134,9 +124,6 @@ public class AddMeetingFragment extends Fragment {
             if (isChecked){
                 roomASwitch.setChecked(false);
                 roomCSwitch.setChecked(false);
-                isRoomA[0] = false;
-                isRoomB[0] = true;
-                isRoomC[0] = false;
             }
         });
 
@@ -144,20 +131,17 @@ public class AddMeetingFragment extends Fragment {
             if (isChecked){
                 roomASwitch.setChecked(false);
                 roomBSwitch.setChecked(false);
-                isRoomA[0] = false;
-                isRoomB[0] = false;
-                isRoomC[0] = true;
             }
         });
+    }
 
-        if (isRoomA[0])
-            return ROOM_A;
-        else if (isRoomB[0])
-            return ROOM_B;
-        else if (isRoomC[0])
-            return ROOM_C;
-
-        return null;
+    private void setMeetingPlace(){
+        if (roomASwitch.isChecked())
+            meeting.setPlace("Room A");
+        else if (roomBSwitch.isChecked())
+            meeting.setPlace("Room B");
+        else if (roomCSwitch.isChecked())
+            meeting.setPlace("Room C");
     }
 
     private void setDate(){
