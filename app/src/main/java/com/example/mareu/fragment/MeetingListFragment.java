@@ -26,6 +26,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class MeetingListFragment extends Fragment {
     public static final String TOMORROW = "Tomorrow";
@@ -81,7 +82,7 @@ public class MeetingListFragment extends Fragment {
 
         fab.setOnClickListener(v -> {
             startActivity(intent);
-            getActivity().finish();
+            Objects.requireNonNull(getActivity()).finish();
         });
     }
 

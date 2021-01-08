@@ -5,6 +5,9 @@ import android.view.View;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.test.espresso.NoMatchingViewException;
 import androidx.test.espresso.ViewAssertion;
+
+import com.example.mareu.adapter.MeetingListRecyclerViewAdapter;
+
 import static org.hamcrest.CoreMatchers.is;
 
 import static androidx.test.espresso.matcher.ViewMatchers.assertThat;
@@ -18,12 +21,11 @@ public class AssertRecyclerItemCount implements ViewAssertion{
 
     @Override
     public void check(View view, NoMatchingViewException noViewFoundException) {
-        if (noViewFoundException != null) {
+        if (noViewFoundException != null)
             throw noViewFoundException;
-        }
 
         RecyclerView recyclerView = (RecyclerView) view;
-        RecyclerView.Adapter adapter = recyclerView.getAdapter();
+        MeetingListRecyclerViewAdapter adapter = (MeetingListRecyclerViewAdapter) recyclerView.getAdapter();
         assert adapter != null;
         assertThat(adapter.getItemCount(), is(expectedCount));
     }

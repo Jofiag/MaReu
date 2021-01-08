@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="7dp">
@@ -46,7 +47,8 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:maxLines="1"
-                android:maxWidth="237dp" />
+                android:maxWidth="237dp"
+                tools:ignore="RelativeOverlap" />
 
             <TextView
                 android:id="@+id/participants_emails_text"
