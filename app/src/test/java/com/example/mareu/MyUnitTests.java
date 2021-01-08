@@ -6,6 +6,7 @@ import com.example.mareu.model.Meeting;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -57,8 +58,11 @@ public class MyUnitTests {
     }
 
     @Test
-    public void sortMeetingListIsSuccessful(){
+    public void filterMeetingListIsSuccessful(){
         List<Meeting> meetingList = new ArrayList<>();
+        Calendar calendar = Calendar.getInstance();
+        int currentDay = calendar.get(Calendar.DAY_OF_MONTH);
+        int tomorrow = currentDay + 1;
 
         List<String> emailList = new ArrayList<>();
         emailList.add("kevin@gmail.com");
@@ -70,26 +74,48 @@ public class MyUnitTests {
         meetingA.setTime("11h00");
         meetingA.setSubject("Android developer");
         meetingA.setParticipantMailList(emailList);
+        meetingA.setDay(currentDay);
+        meetingA.setMonth(1);
+        meetingA.setYear(2021);
 
         Meeting meetingB = new Meeting();
         meetingB.setPlace("Room B");
         meetingB.setTime("11h00");
         meetingB.setSubject("Android developer");
         meetingB.setParticipantMailList(emailList);
+        meetingB.setDay(tomorrow);
+        meetingB.setMonth(1);
+        meetingB.setYear(2021);
 
         Meeting meetingC = new Meeting();
         meetingC.setPlace("Room C");
         meetingC.setTime("11h00");
         meetingC.setSubject("Android developer");
         meetingC.setParticipantMailList(emailList);
+        meetingC.setDay(tomorrow);
+        meetingC.setMonth(1);
+        meetingC.setYear(2021);
 
         meetingList.add(meetingB);
         meetingList.add(meetingC);
         meetingList.add(meetingA);
+        List<Meeting> meetingListFiltered;
 
-        assertTrue(meetingList.get(0) == meetingB && meetingList.get(1) == meetingC && meetingList.get(2) == meetingA);
+        //Checking filter with Room
+        meetingListFiltered = MyMethodsApi.selectMeetingInRoomA(meetingList);
+        assertTrue(meetingListFiltered.contains(meetingA) && meetingListFiltered.size() == 1);
 
-        MyMethodsApi.sortMeetingListByPlace(meetingList);
-        assertTrue(meetingList.get(0) == meetingA && meetingList.get(1) == meetingB && meetingList.get(2) == meetingC);
+        meetingListFiltered = MyMethodsApi.selectMeetingInRoomB(meetingList);
+        assertTrue(meetingListFiltered.contains(meetingB) && meetingListFiltered.size() == 1);
+
+        meetingListFiltered = MyMethodsApi.selectMeetingInRoomC(meetingList);
+        assertTrue(meetingListFiltered.contains(meetingC) && meetingListFiltered.size() == 1);
+
+        //Checking filter with Date
+        meetingListFiltered = MyMethodsApi.selectTodayMeeting(meetingList);
+        assertTrue(meetingListFiltered.contains(meetingA) && meetingListFiltered.size() == 1);
+
+        meetingListFiltered = MyMethodsApi.selectTomorrowMeeting(meetingList);
+        assertTrue(meetingListFiltered.contains(meetingB) && meetingListFiltered.contains(meetingC) && meetingListFiltered.size() == 2);
     }
 }
