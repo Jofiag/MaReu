@@ -61,7 +61,7 @@ public class MeetingDetailsFragment extends Fragment {
 
         dateText.setText(MessageFormat.format("{0}/{1}/{2}", meeting.getDay(), meeting.getMonth(), meeting.getYear()));
         timeText.setText(MessageFormat.format("{0}h{1}", meeting.getHour(), meeting.getMinutes()));
-        roomText.setText(meeting.getPlace());
+        roomText.setText(meeting.getRoom().getRoomText());
         subjectText.setText(meeting.getSubject());
         participantsEmailsText.setText(emailsText);
     }

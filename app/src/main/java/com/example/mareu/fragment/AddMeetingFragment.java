@@ -22,12 +22,16 @@ import com.example.mareu.R;
 import com.example.mareu.api.MyMethodsApi;
 import com.example.mareu.controler.MainActivity;
 import com.example.mareu.model.Meeting;
+import com.example.mareu.model.Room;
 
-import java.io.Serializable;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import static com.example.mareu.fragment.MeetingListFragment.ROOM_A;
+import static com.example.mareu.fragment.MeetingListFragment.ROOM_B;
+import static com.example.mareu.fragment.MeetingListFragment.ROOM_C;
 
 public class AddMeetingFragment extends Fragment {
     public static final String MEETING_LIST_CODE = "meeting list";
@@ -88,7 +92,7 @@ public class AddMeetingFragment extends Fragment {
             boolean fieldsEnteredNotEmpty = !TextUtils.isEmpty(subjectEntered);
 
             if (fieldsEnteredNotEmpty && !emailsList.isEmpty()){
-                setMeetingPlace();
+                setMeetingRoom();
                 meeting.setSubject(subjectEntered);
                 meeting.setParticipantMailList(emailsList);
 
@@ -128,13 +132,13 @@ public class AddMeetingFragment extends Fragment {
         });
     }
 
-    private void setMeetingPlace(){
+    private void setMeetingRoom(){
         if (roomASwitch.isChecked())
-            meeting.setPlace("Room A");
+            meeting.setRoom(new Room(ROOM_A));
         else if (roomBSwitch.isChecked())
-            meeting.setPlace("Room B");
+            meeting.setRoom(new Room(ROOM_B));
         else if (roomCSwitch.isChecked())
-            meeting.setPlace("Room C");
+            meeting.setRoom(new Room(ROOM_C));
     }
 
     private void setDate(){
@@ -199,7 +203,7 @@ public class AddMeetingFragment extends Fragment {
 
     private void showAllMeeting(){
         Intent intent = new Intent(getActivity(), MainActivity.class);
-        intent.putExtra(MEETING_LIST_CODE, (Serializable) meetingList);
+        //intent.putExtra(MEETING_LIST_CODE, (Serializable) meetingList);
         startActivity(intent);
     }
 }

@@ -4,26 +4,26 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Meeting implements Serializable {
-    private String place, subject, time;
+    private String subject, time;
     private List<String> participantMailList;
     private int day, month, year, hour, minutes;
+    private Room room;
 
     public Meeting() {
     }
 
-    public Meeting(String place, String subject, String time, List<String> participantMailList) {
-        this.place = place;
+    public Meeting(String subject, String time, List<String> participantMailList) {
         this.subject = subject;
         this.time = time;
         this.participantMailList = participantMailList;
     }
 
-    public String getPlace() {
-        return place;
+    public Room getRoom() {
+        return room;
     }
 
-    public void setPlace(String place) {
-        this.place = place;
+    public void setRoom(Room room) {
+        this.room = room;
     }
 
     public String getSubject() {

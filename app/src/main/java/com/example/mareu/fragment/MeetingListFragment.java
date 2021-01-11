@@ -175,8 +175,4 @@ public class MeetingListFragment extends Fragment {
             recyclerView.setAdapter(adapter);
             Toast.makeText(getActivity(), "List filtered !", Toast.LENGTH_SHORT).show();
     }
-
-    /*private void setItemChecked(MenuItem item){
-        item.setChecked(!item.isChecked());
-    }*/
 }

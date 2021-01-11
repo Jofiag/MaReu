@@ -7,6 +7,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import static com.example.mareu.fragment.MeetingListFragment.ROOM_A;
+import static com.example.mareu.fragment.MeetingListFragment.ROOM_B;
+import static com.example.mareu.fragment.MeetingListFragment.ROOM_C;
+
 public class MyMethodsApi{
     private static final MeetingDatabase db = MeetingDatabase.getInstance();
 
@@ -24,7 +28,7 @@ public class MyMethodsApi{
         List<Meeting> filteredList = new ArrayList<>();
 
         for (Meeting meeting : meetingList){
-            if (meeting.getPlace().equals("Room A"))
+            if (meeting.getRoom().getRoomText().equals(ROOM_A))
                 filteredList.add(meeting);
         }
 
@@ -42,7 +46,7 @@ public class MyMethodsApi{
         List<Meeting> filteredList = new ArrayList<>();
 
         for (Meeting meeting : meetingList){
-            if (meeting.getPlace().equals("Room B"))
+            if (meeting.getRoom().getRoomText().equals(ROOM_B))
                 filteredList.add(meeting);
         }
 
@@ -53,7 +57,7 @@ public class MyMethodsApi{
         List<Meeting> filteredList = new ArrayList<>();
 
         for (Meeting meeting : meetingList){
-            if (meeting.getPlace().equals("Room C"))
+            if (meeting.getRoom().getRoomText().equals(ROOM_C))
                 filteredList.add(meeting);
         }
 
@@ -91,24 +95,5 @@ public class MyMethodsApi{
         return filteredList;
     }
 
-    /*public static List<Meeting> meetingSelection(List<Meeting> meetingList, String status){
-        List<Meeting> filteredList;
 
-        switch (status){
-            case "Room A":
-                filteredList = MyMethodsApi.selectMeetingInRoomA(meetingList);
-                break;
-            case "Room B":
-                filteredList = MyMethodsApi.selectMeetingInRoomB(meetingList);
-                break;
-            case "Room C":
-                filteredList = MyMethodsApi.selectMeetingInRoomC(meetingList);
-                break;
-            default:
-                filteredList = MyMethodsApi.selectAllMeeting(meetingList);
-                break;
-        }
-
-        return filteredList;
-    }*/
 }

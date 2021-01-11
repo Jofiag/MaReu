@@ -2,24 +2,21 @@ package com.example.mareu.model;
 
 import android.graphics.Color;
 
+import static com.example.mareu.fragment.MeetingListFragment.ROOM_A;
+import static com.example.mareu.fragment.MeetingListFragment.ROOM_B;
+import static com.example.mareu.fragment.MeetingListFragment.ROOM_C;
+
 public class Room {
-    private String room;
+    private final String room;
     private int color;
 
-    public Room() {
-    }
-
-    public Room(String room, int color) {
+    public Room(String room) {
         this.room = room;
-        this.color = color;
+        setColor();
     }
 
-    public String getRoom() {
+    public String getRoomText() {
         return room;
-    }
-
-    public void setRoom(String room) {
-        this.room = room;
     }
 
     public int getColor() {
@@ -28,13 +25,13 @@ public class Room {
 
     public void setColor() {
         switch (room){
-            case "Room A":
+            case ROOM_A:
                 this.color = Color.GREEN;
                 break;
-            case "Room B":
+            case ROOM_B:
                 this.color = Color.YELLOW;
                 break;
-            case "Room C":
+            case ROOM_C:
                 this.color = Color.RED;
                 break;
         }

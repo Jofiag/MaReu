@@ -1,7 +1,6 @@
 package com.example.mareu.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ import com.example.mareu.api.MyMethodsApi;
 import com.example.mareu.model.Meeting;
 
 import java.util.List;
-import java.util.Random;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -44,8 +42,7 @@ public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<Meeting
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Meeting meeting = meetingList.get(position);
 
-        int[] colorTable = {Color.YELLOW, Color.GREEN, Color.GRAY, Color.BLUE, Color.BLACK, Color.WHITE, Color.MAGENTA};
-        String details = meeting.getSubject() + " - " + meeting.getTime() + " - " + meeting.getPlace();
+        String details = meeting.getSubject() + " - " + meeting.getTime() + " - " + meeting.getRoom().getRoomText();
         StringBuilder emailsText = new StringBuilder();
         List<String> emailList = meeting.getParticipantMailList();
         for (int i = 0; i < emailList.size(); i++) {
@@ -55,7 +52,7 @@ public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<Meeting
                 emailsText.append(", ").append(emailList.get(i));
         }
 
-        holder.meetingImageView.setColorFilter(colorTable[randomInt(6, 0)]);
+        holder.meetingImageView.setColorFilter(meeting.getRoom().getColor());
         holder.someMeetingDetailsText.setText(details);
         holder.participantsEmailsText.setText(emailsText.toString());
         holder.deleteImageButton.setOnClickListener(v -> {
@@ -87,7 +84,4 @@ public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<Meeting
         }
     }
 
-    public static int randomInt(int max, int min){
-        return new Random().nextInt(max - min) + min;
-    }
 }
