@@ -31,31 +31,12 @@ public class MyMethodsApi{
         return filteredList;
     }
 
-    public static List<Meeting> selectTodayMeeting(){
+    public static List<Meeting> selectMeetingByDate(int day){
         List<Meeting> filteredList = new ArrayList<>();
 
-        Calendar calendar = Calendar.getInstance();
-        int currentDay = calendar.get(Calendar.DAY_OF_MONTH);
-
         for (Meeting meeting : db.getMeetingList()){
-            boolean meetingIsToday = meeting.getCalendar().get(Calendar.DAY_OF_MONTH) == currentDay;
+            boolean meetingIsToday = meeting.getCalendar().get(Calendar.DAY_OF_MONTH) == day;
             if (meetingIsToday)
-                filteredList.add(meeting);
-        }
-
-        return filteredList;
-    }
-
-    public static List<Meeting> selectTomorrowMeeting(){
-        List<Meeting> filteredList = new ArrayList<>();
-
-        Calendar calendar = Calendar.getInstance();
-        int currentDay = calendar.get(Calendar.DAY_OF_MONTH);
-
-
-        for (Meeting meeting : db.getMeetingList()){
-            boolean meetingIsTomorrow = meeting.getCalendar().get(Calendar.DAY_OF_MONTH) == currentDay+1;
-            if (meetingIsTomorrow)
                 filteredList.add(meeting);
         }
 

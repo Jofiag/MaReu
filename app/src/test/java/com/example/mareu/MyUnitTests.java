@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import static com.example.mareu.fragment.MeetingListFragment.CURRENT_DAY;
+import static com.example.mareu.fragment.MeetingListFragment.NEXT_DAY;
 import static com.example.mareu.fragment.MeetingListFragment.ROOM_A;
 import static com.example.mareu.fragment.MeetingListFragment.ROOM_B;
 import static com.example.mareu.fragment.MeetingListFragment.ROOM_C;
@@ -113,10 +115,10 @@ public class MyUnitTests {
         assertTrue(meetingListFiltered.contains(meetingC) && meetingListFiltered.size() == 1);
 
         //Checking filter with Date
-        meetingListFiltered = MyMethodsApi.selectTodayMeeting();
+        meetingListFiltered = MyMethodsApi.selectMeetingByDate(CURRENT_DAY);
         assertTrue(meetingListFiltered.contains(meetingA) && meetingListFiltered.size() == 1);
 
-        meetingListFiltered = MyMethodsApi.selectTomorrowMeeting();
+        meetingListFiltered = MyMethodsApi.selectMeetingByDate(NEXT_DAY);
         assertTrue(meetingListFiltered.contains(meetingB) && meetingListFiltered.contains(meetingC) && meetingListFiltered.size() == 2);
     }
 }

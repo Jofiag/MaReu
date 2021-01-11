@@ -25,6 +25,7 @@ import com.example.mareu.model.Meeting;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 
@@ -36,6 +37,8 @@ public class MeetingListFragment extends Fragment {
     public static final String ROOM_B = "Room B";
     public static final String ROOM_A = "Room A";
     public static final String ALL_DATE = "All Date";
+    public static final int CURRENT_DAY = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+    public static final int NEXT_DAY = CURRENT_DAY + 1;
 
     private List<Meeting> meetingList = new ArrayList<>();
     private RecyclerView recyclerView;
@@ -161,10 +164,10 @@ public class MeetingListFragment extends Fragment {
                 filteredList = MyMethodsApi.selectMeetingByRoom(ROOM_C);
                 break;
             case TODAY:
-                filteredList = MyMethodsApi.selectTodayMeeting();
+                filteredList = MyMethodsApi.selectMeetingByDate(CURRENT_DAY);
                 break;
             case TOMORROW:
-                filteredList = MyMethodsApi.selectTomorrowMeeting();
+                filteredList = MyMethodsApi.selectMeetingByDate(NEXT_DAY);
                 break;
             default:
                 filteredList = meetingList;
