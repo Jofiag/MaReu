@@ -161,10 +161,10 @@ public class MeetingListFragment extends Fragment {
                 filteredList = MyMethodsApi.selectMeetingByRoom(ROOM_C);
                 break;
             case TODAY:
-                filteredList = MyMethodsApi.selectTodayMeeting(meetingList);
+                filteredList = MyMethodsApi.selectTodayMeeting();
                 break;
             case TOMORROW:
-                filteredList = MyMethodsApi.selectTomorrowMeeting(meetingList);
+                filteredList = MyMethodsApi.selectTomorrowMeeting();
                 break;
             default:
                 filteredList = meetingList;

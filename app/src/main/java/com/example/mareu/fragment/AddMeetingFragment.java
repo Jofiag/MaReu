@@ -84,7 +84,7 @@ public class AddMeetingFragment extends Fragment {
 
     private void saveMeeting(Context context){
         setDateButton.setOnClickListener(v -> setDate());
-        setHourButton.setOnClickListener(v -> setHour());
+        setHourButton.setOnClickListener(v -> setTime());
         addParticipantEmailButton.setOnClickListener(v -> showParticipantEditText());
 
         saveMeetingButton.setOnClickListener(v -> {
@@ -94,6 +94,7 @@ public class AddMeetingFragment extends Fragment {
             if (fieldsEnteredNotEmpty && !emailsList.isEmpty()){
                 setMeetingRoom();
                 meeting.setSubject(subjectEntered);
+                meeting.setCalendar(calendar);
                 meeting.setParticipantMailList(emailsList);
 
                 MyMethodsApi.addMeeting(meetingList, meeting);
@@ -152,16 +153,16 @@ public class AddMeetingFragment extends Fragment {
             DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
                     (view, year, monthOfYear, dayOfMonth) -> {
                         dateTextView.setText(MessageFormat.format("{0}/{1}/{2}", dayOfMonth, monthOfYear + 1, year));
-                        meeting.setDay(dayOfMonth);
-                        meeting.setMonth(monthOfYear + 1);
-                        meeting.setYear(year);
+                        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                        calendar.set(Calendar.MONTH, monthOfYear+1);
+                        calendar.set(Calendar.YEAR, year);
                     }, currentYear, currentMonth, currentDay);
 
             datePickerDialog.show();
         }
     }
 
-    private void setHour(){
+    private void setTime(){
         //Current time
         int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
         int currentMinute = calendar.get(Calendar.MINUTE);
@@ -170,10 +171,9 @@ public class AddMeetingFragment extends Fragment {
         TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(),
                 (view, hourOfDay, minute) -> {
                     hourTextView.setText(MessageFormat.format("{0}h{1}", hourOfDay, minute));
-                    meeting.setHour(hourOfDay);
-                    meeting.setMinutes(minute);
-                    meeting.setTime(hourOfDay + "h" + minute);
-                }, currentHour, currentMinute, true);
+                    calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                    calendar.set(Calendar.MINUTE, minute);
+                 }, currentHour, currentMinute, true);
 
         timePickerDialog.show();
     }

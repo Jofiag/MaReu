@@ -31,14 +31,14 @@ public class MyMethodsApi{
         return filteredList;
     }
 
-    public static List<Meeting> selectTodayMeeting(List<Meeting> meetingList){
+    public static List<Meeting> selectTodayMeeting(){
         List<Meeting> filteredList = new ArrayList<>();
 
         Calendar calendar = Calendar.getInstance();
         int currentDay = calendar.get(Calendar.DAY_OF_MONTH);
 
-        for (Meeting meeting : meetingList){
-            boolean meetingIsToday = meeting.getDay() == currentDay;
+        for (Meeting meeting : db.getMeetingList()){
+            boolean meetingIsToday = meeting.getCalendar().get(Calendar.DAY_OF_MONTH) == currentDay;
             if (meetingIsToday)
                 filteredList.add(meeting);
         }
@@ -46,15 +46,15 @@ public class MyMethodsApi{
         return filteredList;
     }
 
-    public static List<Meeting> selectTomorrowMeeting(List<Meeting> meetingList){
+    public static List<Meeting> selectTomorrowMeeting(){
         List<Meeting> filteredList = new ArrayList<>();
 
         Calendar calendar = Calendar.getInstance();
         int currentDay = calendar.get(Calendar.DAY_OF_MONTH);
 
 
-        for (Meeting meeting : meetingList){
-            boolean meetingIsTomorrow = meeting.getDay() == currentDay+1;
+        for (Meeting meeting : db.getMeetingList()){
+            boolean meetingIsTomorrow = meeting.getCalendar().get(Calendar.DAY_OF_MONTH) == currentDay+1;
             if (meetingIsTomorrow)
                 filteredList.add(meeting);
         }

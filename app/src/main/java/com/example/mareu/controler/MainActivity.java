@@ -7,23 +7,15 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.mareu.MeetingDatabase;
 import com.example.mareu.R;
 import com.example.mareu.adapter.MeetingListRecyclerViewAdapter;
 import com.example.mareu.fragment.MeetingDetailsFragment;
 import com.example.mareu.fragment.MeetingListFragment;
 import com.example.mareu.model.Meeting;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.example.mareu.fragment.AddMeetingFragment.MEETING_LIST_CODE;
-
 public class MainActivity extends AppCompatActivity implements MeetingListRecyclerViewAdapter.OnMeetingClickListener {
     public static final String MEETING_SELECTED_CODE = "meeting selected";
     private boolean isDualPane;
-    private List<Meeting> meetingList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +28,6 @@ public class MainActivity extends AppCompatActivity implements MeetingListRecycl
     }
 
     private void getMeetingList() {
-        meetingList = MeetingDatabase.getInstance().getMeetingList();
-        if (meetingList.isEmpty())
-            meetingList = MeetingDatabase.getInstance().initiateMeetingList();
     }
 
     private void attachNewFragment(Fragment newFragment, int container) {
@@ -52,19 +41,11 @@ public class MainActivity extends AppCompatActivity implements MeetingListRecycl
     private void attachMeetingListFragment(){
         Fragment fragment = new MeetingListFragment();
 
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(MEETING_LIST_CODE, (Serializable) meetingList);
-        fragment.setArguments(bundle);
-
         attachNewFragment(fragment, R.id.meeting_list_fragment_container);
     }
 
-    private void attachMeetingDetailsFragment(Meeting meetingSelected){
+    private void attachMeetingDetailsFragment(){
         Fragment fragment = new MeetingDetailsFragment();
-
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(MEETING_SELECTED_CODE, meetingSelected);
-        fragment.setArguments(bundle);
 
         attachNewFragment(fragment, R.id.meeting_details_fragment_container);
     }
@@ -76,6 +57,6 @@ public class MainActivity extends AppCompatActivity implements MeetingListRecycl
     @Override
     public void onMeetingSelected(Meeting meeting) {
         if (isDualPane)
-            attachMeetingDetailsFragment(meeting);
+            attachMeetingDetailsFragment();
     }
 }

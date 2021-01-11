@@ -26,9 +26,11 @@ public class MyUnitTests {
         emailList.add("jeremy@yahoo.fr");
         emailList.add("mark@sfr.fr");
 
+        Calendar calendar = Calendar.getInstance();
+
         Meeting meeting = new Meeting();
         meeting.setRoom(new Room(ROOM_B));
-        meeting.setTime("11h00");
+        meeting.setCalendar(calendar);
         meeting.setSubject("Android developer");
         meeting.setParticipantMailList(emailList);
 
@@ -46,9 +48,11 @@ public class MyUnitTests {
         emailList.add("jeremy@yahoo.fr");
         emailList.add("mark@sfr.fr");
 
+        Calendar calendar = Calendar.getInstance();
+
         Meeting meeting = new Meeting();
-        meeting.setRoom(new Room(ROOM_A));
-        meeting.setTime("11h00");
+        meeting.setRoom(new Room(ROOM_B));
+        meeting.setCalendar(calendar);
         meeting.setSubject("Android developer");
         meeting.setParticipantMailList(emailList);
 
@@ -63,7 +67,7 @@ public class MyUnitTests {
 
     @Test
     public void filterMeetingListIsSuccessful(){
-        List<Meeting> meetingList = new ArrayList<>();
+
         Calendar calendar = Calendar.getInstance();
         int currentDay = calendar.get(Calendar.DAY_OF_MONTH);
         int tomorrow = currentDay + 1;
@@ -75,34 +79,27 @@ public class MyUnitTests {
 
         Meeting meetingA = new Meeting();
         meetingA.setRoom(new Room(ROOM_A));
-        meetingA.setTime("11h00");
+        meetingA.setCalendar(calendar);
         meetingA.setSubject("Android developer");
         meetingA.setParticipantMailList(emailList);
-        meetingA.setDay(currentDay);
-        meetingA.setMonth(1);
-        meetingA.setYear(2021);
 
+        calendar.set(Calendar.DAY_OF_MONTH, tomorrow);
         Meeting meetingB = new Meeting();
         meetingB.setRoom(new Room(ROOM_B));
-        meetingB.setTime("11h00");
+        meetingB.setCalendar(calendar);
         meetingB.setSubject("Android developer");
         meetingB.setParticipantMailList(emailList);
-        meetingB.setDay(tomorrow);
-        meetingB.setMonth(1);
-        meetingB.setYear(2021);
 
+        calendar.set(Calendar.DAY_OF_MONTH, tomorrow + 1);
         Meeting meetingC = new Meeting();
         meetingC.setRoom(new Room(ROOM_C));
-        meetingC.setTime("11h00");
         meetingC.setSubject("Android developer");
         meetingC.setParticipantMailList(emailList);
-        meetingC.setDay(tomorrow);
-        meetingC.setMonth(1);
-        meetingC.setYear(2021);
 
-        meetingList.add(meetingB);
-        meetingList.add(meetingC);
-        meetingList.add(meetingA);
+        MyMethodsApi.addMeeting(MeetingDatabase.getInstance().getMeetingList(), meetingA);
+        MyMethodsApi.addMeeting(MeetingDatabase.getInstance().getMeetingList(), meetingB);
+        MyMethodsApi.addMeeting(MeetingDatabase.getInstance().getMeetingList(), meetingC);
+
         List<Meeting> meetingListFiltered;
 
         //Checking filter with Room
@@ -116,10 +113,10 @@ public class MyUnitTests {
         assertTrue(meetingListFiltered.contains(meetingC) && meetingListFiltered.size() == 1);
 
         //Checking filter with Date
-        meetingListFiltered = MyMethodsApi.selectTodayMeeting(meetingList);
+        meetingListFiltered = MyMethodsApi.selectTodayMeeting();
         assertTrue(meetingListFiltered.contains(meetingA) && meetingListFiltered.size() == 1);
 
-        meetingListFiltered = MyMethodsApi.selectTomorrowMeeting(meetingList);
+        meetingListFiltered = MyMethodsApi.selectTomorrowMeeting();
         assertTrue(meetingListFiltered.contains(meetingB) && meetingListFiltered.contains(meetingC) && meetingListFiltered.size() == 2);
     }
 }

@@ -14,6 +14,7 @@ import com.example.mareu.R;
 import com.example.mareu.api.MyMethodsApi;
 import com.example.mareu.model.Meeting;
 
+import java.util.Calendar;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -42,7 +43,8 @@ public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<Meeting
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Meeting meeting = meetingList.get(position);
 
-        String details = meeting.getSubject() + " - " + meeting.getTime() + " - " + meeting.getRoom().getRoomText();
+        String timeText = meeting.getCalendar().get(Calendar.HOUR_OF_DAY) + "h" + meeting.getCalendar().get(Calendar.MINUTE);
+        String details = meeting.getSubject() + " - " + timeText + " - " + meeting.getRoom().getRoomText();
         StringBuilder emailsText = new StringBuilder();
         List<String> emailList = meeting.getParticipantMailList();
         for (int i = 0; i < emailList.size(); i++) {
