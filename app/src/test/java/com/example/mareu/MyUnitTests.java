@@ -2,6 +2,7 @@ package com.example.mareu;
 
 import com.example.mareu.api.MyMethodsApi;
 import com.example.mareu.model.Meeting;
+import com.example.mareu.model.Room;
 
 import org.junit.Test;
 
@@ -9,6 +10,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import static com.example.mareu.fragment.MeetingListFragment.ROOM_A;
+import static com.example.mareu.fragment.MeetingListFragment.ROOM_B;
+import static com.example.mareu.fragment.MeetingListFragment.ROOM_C;
 import static org.junit.Assert.*;
 
 public class MyUnitTests {
@@ -23,7 +27,7 @@ public class MyUnitTests {
         emailList.add("mark@sfr.fr");
 
         Meeting meeting = new Meeting();
-        meeting.setPlace("Room 1");
+        meeting.setRoom(new Room(ROOM_B));
         meeting.setTime("11h00");
         meeting.setSubject("Android developer");
         meeting.setParticipantMailList(emailList);
@@ -43,7 +47,7 @@ public class MyUnitTests {
         emailList.add("mark@sfr.fr");
 
         Meeting meeting = new Meeting();
-        meeting.setPlace("Room 1");
+        meeting.setRoom(new Room(ROOM_A));
         meeting.setTime("11h00");
         meeting.setSubject("Android developer");
         meeting.setParticipantMailList(emailList);
@@ -70,7 +74,7 @@ public class MyUnitTests {
         emailList.add("mark@sfr.fr");
 
         Meeting meetingA = new Meeting();
-        meetingA.setPlace("Room A");
+        meetingA.setRoom(new Room(ROOM_A));
         meetingA.setTime("11h00");
         meetingA.setSubject("Android developer");
         meetingA.setParticipantMailList(emailList);
@@ -79,7 +83,7 @@ public class MyUnitTests {
         meetingA.setYear(2021);
 
         Meeting meetingB = new Meeting();
-        meetingB.setPlace("Room B");
+        meetingB.setRoom(new Room(ROOM_B));
         meetingB.setTime("11h00");
         meetingB.setSubject("Android developer");
         meetingB.setParticipantMailList(emailList);
@@ -88,7 +92,7 @@ public class MyUnitTests {
         meetingB.setYear(2021);
 
         Meeting meetingC = new Meeting();
-        meetingC.setPlace("Room C");
+        meetingC.setRoom(new Room(ROOM_C));
         meetingC.setTime("11h00");
         meetingC.setSubject("Android developer");
         meetingC.setParticipantMailList(emailList);
@@ -102,13 +106,13 @@ public class MyUnitTests {
         List<Meeting> meetingListFiltered;
 
         //Checking filter with Room
-        meetingListFiltered = MyMethodsApi.selectMeetingInRoomA(meetingList);
+        meetingListFiltered = MyMethodsApi.selectMeetingByRoom(ROOM_A);
         assertTrue(meetingListFiltered.contains(meetingA) && meetingListFiltered.size() == 1);
 
-        meetingListFiltered = MyMethodsApi.selectMeetingInRoomB(meetingList);
+        meetingListFiltered = MyMethodsApi.selectMeetingByRoom(ROOM_B);
         assertTrue(meetingListFiltered.contains(meetingB) && meetingListFiltered.size() == 1);
 
-        meetingListFiltered = MyMethodsApi.selectMeetingInRoomC(meetingList);
+        meetingListFiltered = MyMethodsApi.selectMeetingByRoom(ROOM_C);
         assertTrue(meetingListFiltered.contains(meetingC) && meetingListFiltered.size() == 1);
 
         //Checking filter with Date

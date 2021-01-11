@@ -7,10 +7,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import static com.example.mareu.fragment.MeetingListFragment.ROOM_A;
-import static com.example.mareu.fragment.MeetingListFragment.ROOM_B;
-import static com.example.mareu.fragment.MeetingListFragment.ROOM_C;
-
 public class MyMethodsApi{
     private static final MeetingDatabase db = MeetingDatabase.getInstance();
 
@@ -24,40 +20,11 @@ public class MyMethodsApi{
         db.setMeetingList(meetingList);
     }
 
-    public static List<Meeting> selectMeetingInRoomA(List<Meeting> meetingList){
+    public static List<Meeting> selectMeetingByRoom(String room){
         List<Meeting> filteredList = new ArrayList<>();
 
-        for (Meeting meeting : meetingList){
-            if (meeting.getRoom().getRoomText().equals(ROOM_A))
-                filteredList.add(meeting);
-        }
-
-        /* OR
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            meetingList.stream()
-                    .filter(meeting -> meeting.getPlace().equals("Room A"))
-                    .forEach(filteredList::add);
-        }*/
-
-        return filteredList;
-    }
-
-    public static List<Meeting> selectMeetingInRoomB(List<Meeting> meetingList){
-        List<Meeting> filteredList = new ArrayList<>();
-
-        for (Meeting meeting : meetingList){
-            if (meeting.getRoom().getRoomText().equals(ROOM_B))
-                filteredList.add(meeting);
-        }
-
-        return filteredList;
-    }
-
-    public static List<Meeting> selectMeetingInRoomC(List<Meeting> meetingList){
-        List<Meeting> filteredList = new ArrayList<>();
-
-        for (Meeting meeting : meetingList){
-            if (meeting.getRoom().getRoomText().equals(ROOM_C))
+        for (Meeting meeting : db.getMeetingList()){
+            if (meeting.getRoom().getRoomText().equals(room))
                 filteredList.add(meeting);
         }
 

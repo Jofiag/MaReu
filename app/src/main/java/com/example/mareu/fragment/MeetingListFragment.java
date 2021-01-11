@@ -152,13 +152,13 @@ public class MeetingListFragment extends Fragment {
 
         switch (status) {
             case ROOM_A:
-                filteredList = MyMethodsApi.selectMeetingInRoomA(meetingList);
+                filteredList = MyMethodsApi.selectMeetingByRoom(ROOM_A);
                 break;
             case ROOM_B:
-                filteredList = MyMethodsApi.selectMeetingInRoomB(meetingList);
+                filteredList = MyMethodsApi.selectMeetingByRoom(ROOM_B);
                 break;
             case ROOM_C:
-                filteredList = MyMethodsApi.selectMeetingInRoomC(meetingList);
+                filteredList = MyMethodsApi.selectMeetingByRoom(ROOM_C);
                 break;
             case TODAY:
                 filteredList = MyMethodsApi.selectTodayMeeting(meetingList);
