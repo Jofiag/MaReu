@@ -18,11 +18,10 @@ import static com.example.mareu.fragment.MeetingListFragment.ROOM_C;
 import static org.junit.Assert.*;
 
 public class MyUnitTests {
+    private final MeetingDatabase db = MeetingDatabase.getInstance();
 
     @Test
     public void addMeetingIsSuccessful(){
-        List<Meeting> meetingList = new ArrayList<>();
-
         List<String> emailList = new ArrayList<>();
         emailList.add("kevin@gmail.com");
         emailList.add("jeremy@yahoo.fr");
@@ -36,15 +35,13 @@ public class MyUnitTests {
         meeting.setSubject("Android developer");
         meeting.setParticipantMailList(emailList);
 
-        MyMethodsApi.addMeeting(meetingList, meeting);
+        MyMethodsApi.addMeeting(meeting);
 
-        assertTrue(meetingList.contains(meeting));
+        assertTrue(db.getMeetingList().contains(meeting));
     }
 
     @Test
     public void deleteMeetingIsSuccessful(){
-        List<Meeting> meetingList = new ArrayList<>();
-
         List<String> emailList = new ArrayList<>();
         emailList.add("kevin@gmail.com");
         emailList.add("jeremy@yahoo.fr");
@@ -58,13 +55,13 @@ public class MyUnitTests {
         meeting.setSubject("Android developer");
         meeting.setParticipantMailList(emailList);
 
-        int firstSize = meetingList.size();
+        int firstSize = db.getMeetingList().size();
 
-        MyMethodsApi.addMeeting(meetingList, meeting);
-        assertEquals(1, meetingList.size());
+        MyMethodsApi.addMeeting(meeting);
+        assertEquals(1, db.getMeetingList().size());
 
-        MyMethodsApi.deleteMeeting(meetingList, meeting);
-        assertEquals(firstSize, meetingList.size());
+        MyMethodsApi.deleteMeeting(meeting);
+        assertEquals(firstSize, db.getMeetingList().size());
     }
 
     @Test
@@ -98,9 +95,9 @@ public class MyUnitTests {
         meetingC.setSubject("Android developer");
         meetingC.setParticipantMailList(emailList);
 
-        MyMethodsApi.addMeeting(MeetingDatabase.getInstance().getMeetingList(), meetingA);
-        MyMethodsApi.addMeeting(MeetingDatabase.getInstance().getMeetingList(), meetingB);
-        MyMethodsApi.addMeeting(MeetingDatabase.getInstance().getMeetingList(), meetingC);
+        MyMethodsApi.addMeeting(meetingA);
+        MyMethodsApi.addMeeting(meetingB);
+        MyMethodsApi.addMeeting(meetingC);
 
         List<Meeting> meetingListFiltered;
 

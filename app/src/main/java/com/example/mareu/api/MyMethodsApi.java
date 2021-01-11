@@ -10,14 +10,12 @@ import java.util.List;
 public class MyMethodsApi{
     private static final MeetingDatabase db = MeetingDatabase.getInstance();
 
-    public static void addMeeting(List<Meeting> meetingList, Meeting meeting){
-        meetingList.add(meeting);
-        db.setMeetingList(meetingList);
+    public static void addMeeting(Meeting meeting){
+        db.getMeetingList().add(meeting);
     }
 
-    public static void deleteMeeting(List<Meeting> meetingList, Meeting meeting){
-        meetingList.remove(meeting);
-        db.setMeetingList(meetingList);
+    public static void deleteMeeting(Meeting meeting){
+        db.getMeetingList().remove(meeting);
     }
 
     public static List<Meeting> selectMeetingByRoom(String room){

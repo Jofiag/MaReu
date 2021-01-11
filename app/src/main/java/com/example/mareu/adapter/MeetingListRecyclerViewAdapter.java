@@ -59,7 +59,7 @@ public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<Meeting
         holder.participantsEmailsText.setText(emailsText.toString());
         holder.deleteImageButton.setOnClickListener(v -> {
             if (meetingList.contains(meeting))
-                MyMethodsApi.deleteMeeting(meetingList, meeting);
+                MyMethodsApi.deleteMeeting(meeting);
             notifyDataSetChanged();
         });
         holder.itemView.setOnClickListener(v -> mCallback.onMeetingSelected(meeting));

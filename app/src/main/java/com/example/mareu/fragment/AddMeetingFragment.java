@@ -97,7 +97,7 @@ public class AddMeetingFragment extends Fragment {
                 meeting.setCalendar(calendar);
                 meeting.setParticipantMailList(emailsList);
 
-                MyMethodsApi.addMeeting(meetingList, meeting);
+                MyMethodsApi.addMeeting(meeting);
                 if (meetingList.contains(meeting)) {
                     Toast.makeText(context, "Meeting saved !", Toast.LENGTH_SHORT).show();
                     showAllMeeting();
