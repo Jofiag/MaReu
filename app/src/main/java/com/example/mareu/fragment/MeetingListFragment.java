@@ -1,5 +1,6 @@
 package com.example.mareu.fragment;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -44,6 +45,8 @@ public class MeetingListFragment extends Fragment {
     private RecyclerView recyclerView;
     private MeetingListRecyclerViewAdapter adapter;
     private FloatingActionButton fab;
+
+    private int customizeDate;
 
     public MeetingListFragment() {
     }
@@ -95,40 +98,6 @@ public class MeetingListFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-    /*@Override
-    public void onOptionsMenuClosed(@NonNull Menu menu) {
-        super.onOptionsMenuClosed(menu);
-
-        MenuItem roomA = menu.findItem(R.id.room_a_select_item);
-        MenuItem roomB = menu.findItem(R.id.room_b_select_item);
-        MenuItem roomC = menu.findItem(R.id.room_c_select_item);
-        MenuItem allRoom = menu.findItem(R.id.all_room_select_item);
-
-        List<MenuItem> itemList = new ArrayList<>();
-        itemList.add(roomA);
-        itemList.add(roomB);
-        itemList.add(roomC);
-        itemList.add(allRoom);
-
-        List<MenuItem> itemCheckedList = new ArrayList<>();
-
-        for (MenuItem item : itemList){
-            if (item.isChecked())
-                itemCheckedList.add(item);
-        }
-
-        List<Meeting> finalFilteredList = new ArrayList<>();
-        for (MenuItem item : itemCheckedList) {
-            List<Meeting> filteredList = MyMethodsApi.meetingSelection(meetingList, item.getTitle().toString());
-
-            finalFilteredList.addAll(filteredList);
-        }
-
-        adapter = new MeetingListRecyclerViewAdapter(getActivity(), finalFilteredList);
-        recyclerView.setAdapter(adapter);
-
-    }*/
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
@@ -146,7 +115,9 @@ public class MeetingListFragment extends Fragment {
             filterMeetingList(TOMORROW);
         else if (item.getItemId() == R.id.all_date_select_item)
             filterMeetingList(ALL_DATE);
-
+        else if (item.getItemId() == R.id.customize_select_item) {
+            setCustomizeDateAndFilterList();
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -177,5 +148,34 @@ public class MeetingListFragment extends Fragment {
             adapter = new MeetingListRecyclerViewAdapter(getActivity(), filteredList);
             recyclerView.setAdapter(adapter);
             Toast.makeText(getActivity(), "List filtered !", Toast.LENGTH_SHORT).show();
+    }
+
+    private void setCustomizeDateAndFilterList(){
+        Calendar calendar = Calendar.getInstance();
+
+        //Current date
+        int currentDay = calendar.get(Calendar.DAY_OF_MONTH);
+        int currentMonth = calendar.get(Calendar.MONTH);
+        int currentYear = calendar.get(Calendar.YEAR);
+
+        //List<Meeting> filteredList = new ArrayList<>();
+
+        //DatePicker
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
+                    (view, year, monthOfYear, dayOfMonth) -> {
+                    }, currentYear, currentMonth, currentDay);
+
+            datePickerDialog.setOnDateSetListener((view, year, month, dayOfMonth) -> {
+                customizeDate = dayOfMonth;
+                List<Meeting> filteredList = MyMethodsApi.selectMeetingByDate(customizeDate);
+                adapter = new MeetingListRecyclerViewAdapter(getActivity(), filteredList);
+                recyclerView.setAdapter(adapter);
+                Toast.makeText(getActivity(), "List filtered !", Toast.LENGTH_SHORT).show();
+            });
+
+            datePickerDialog.show();
+        }
+
     }
 }
