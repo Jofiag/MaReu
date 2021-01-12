@@ -46,7 +46,6 @@ public class MeetingListFragment extends Fragment {
     private MeetingListRecyclerViewAdapter adapter;
     private FloatingActionButton fab;
 
-    private int customizeDate;
 
     public MeetingListFragment() {
     }
@@ -164,15 +163,11 @@ public class MeetingListFragment extends Fragment {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
             DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
                     (view, year, monthOfYear, dayOfMonth) -> {
+                        List<Meeting> filteredList = MyMethodsApi.selectMeetingByDate(dayOfMonth);
+                        adapter = new MeetingListRecyclerViewAdapter(MeetingListFragment.this.getActivity(), filteredList);
+                        recyclerView.setAdapter(adapter);
+                        Toast.makeText(MeetingListFragment.this.getActivity(), "List filtered !", Toast.LENGTH_SHORT).show();
                     }, currentYear, currentMonth, currentDay);
-
-            datePickerDialog.setOnDateSetListener((view, year, month, dayOfMonth) -> {
-                customizeDate = dayOfMonth;
-                List<Meeting> filteredList = MyMethodsApi.selectMeetingByDate(customizeDate);
-                adapter = new MeetingListRecyclerViewAdapter(getActivity(), filteredList);
-                recyclerView.setAdapter(adapter);
-                Toast.makeText(getActivity(), "List filtered !", Toast.LENGTH_SHORT).show();
-            });
 
             datePickerDialog.show();
         }
