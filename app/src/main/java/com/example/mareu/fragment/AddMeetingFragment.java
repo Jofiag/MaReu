@@ -34,7 +34,6 @@ import static com.example.mareu.fragment.MeetingListFragment.ROOM_B;
 import static com.example.mareu.fragment.MeetingListFragment.ROOM_C;
 
 public class AddMeetingFragment extends Fragment {
-    public static final String MEETING_LIST_CODE = "meeting list";
     private TextView participantsEmailsTextView, dateTextView, hourTextView;
     private EditText subjectEdit, emailEdit;
     private Button addParticipantEmailButton, saveEmailButton, saveMeetingButton, showAllMeetingButton, setDateButton, setHourButton;
@@ -89,9 +88,13 @@ public class AddMeetingFragment extends Fragment {
 
         saveMeetingButton.setOnClickListener(v -> {
             String subjectEntered = subjectEdit.getText().toString().trim();
-            boolean fieldsEnteredNotEmpty = !TextUtils.isEmpty(subjectEntered);
+            boolean fieldsEnteredNotEmpty = !TextUtils.isEmpty(subjectEntered) &&
+                    !emailsList.isEmpty() &&
+                    !dateTextView.getText().equals("date") &&
+                    !hourTextView.getText().equals("hour") &&
+                    (roomASwitch.isChecked() || roomBSwitch.isChecked() || roomCSwitch.isChecked());
 
-            if (fieldsEnteredNotEmpty && !emailsList.isEmpty()){
+            if (fieldsEnteredNotEmpty){
                 setMeetingRoom();
                 meeting.setSubject(subjectEntered);
                 meeting.setCalendar(calendar);
@@ -103,10 +106,8 @@ public class AddMeetingFragment extends Fragment {
                     showAllMeeting();
                 }
             }
-            else if (!fieldsEnteredNotEmpty)
-                Toast.makeText(context, "Empty field are not allowed !", Toast.LENGTH_SHORT).show();
             else
-                Toast.makeText(context, "You must enter at least one participant !", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "All field are required !", Toast.LENGTH_SHORT).show();
         });
     }
 
@@ -185,7 +186,10 @@ public class AddMeetingFragment extends Fragment {
 
         saveEmailButton.setOnClickListener(v -> {
             String emailEntered = emailEdit.getText().toString().trim();
-            if (!TextUtils.isEmpty(emailEntered) && !emailsList.contains(emailEntered)){
+            boolean isEmailCorrect = !TextUtils.isEmpty(emailEntered) &&
+                    emailEntered.contains("@") &&
+                    emailEntered.contains(".");
+            if (isEmailCorrect && !emailsList.contains(emailEntered)){
                 emailsList.add(emailEntered);
                 emailText.append(emailEntered).append("\n\n");
                 participantsEmailsTextView.setText(emailText);
@@ -194,6 +198,8 @@ public class AddMeetingFragment extends Fragment {
                 emailEdit.setVisibility(View.GONE);
                 saveEmailButton.setVisibility(View.GONE);
             }
+            else if (!isEmailCorrect)
+                Toast.makeText(getContext(), "Only email is accepted !", Toast.LENGTH_SHORT).show();
             else if (emailsList.contains(emailEntered))
                 Toast.makeText(getContext(), "Already added to this meeting !", Toast.LENGTH_SHORT).show();
             else
@@ -203,7 +209,6 @@ public class AddMeetingFragment extends Fragment {
 
     private void showAllMeeting(){
         Intent intent = new Intent(getActivity(), MainActivity.class);
-        //intent.putExtra(MEETING_LIST_CODE, (Serializable) meetingList);
         startActivity(intent);
     }
 }
