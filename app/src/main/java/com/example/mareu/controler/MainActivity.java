@@ -44,8 +44,12 @@ public class MainActivity extends AppCompatActivity implements MeetingListRecycl
         attachNewFragment(fragment, R.id.meeting_list_fragment_container);
     }
 
-    private void attachMeetingDetailsFragment(){
+    private void attachMeetingDetailsFragment(Meeting meeting){
         Fragment fragment = new MeetingDetailsFragment();
+
+        Bundle arg = new Bundle();
+        arg.putSerializable(MEETING_SELECTED_CODE, meeting);
+        fragment.setArguments(arg);
 
         attachNewFragment(fragment, R.id.meeting_details_fragment_container);
     }
@@ -56,7 +60,8 @@ public class MainActivity extends AppCompatActivity implements MeetingListRecycl
 
     @Override
     public void onMeetingSelected(Meeting meeting) {
-        if (isDualPane)
-            attachMeetingDetailsFragment();
+        if (isDualPane) {
+            attachMeetingDetailsFragment(meeting);
+        }
     }
 }

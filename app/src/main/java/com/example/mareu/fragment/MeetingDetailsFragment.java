@@ -20,7 +20,7 @@ import static com.example.mareu.controler.MainActivity.MEETING_SELECTED_CODE;
 
 
 public class MeetingDetailsFragment extends Fragment {
-    private Meeting meeting;
+    private Meeting meeting = new Meeting();
 
     public MeetingDetailsFragment() {
         // Required empty public constructor
