@@ -18,6 +18,15 @@ public class MyMethodsApi{
         db.getMeetingList().remove(meeting);
     }
 
+    public static void deleteAllMeeting(){
+        List<Meeting> meetingList = db.getMeetingList();
+
+        for (Meeting meeting : meetingList)
+            meetingList.remove(meeting);
+
+        db.setMeetingList(meetingList);
+    }
+
     public static List<Meeting> selectMeetingByRoom(String room){
         List<Meeting> filteredList = new ArrayList<>();
 
