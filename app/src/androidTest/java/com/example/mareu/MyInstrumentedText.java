@@ -29,10 +29,10 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 public class MyInstrumentedText {
     private String subject1, email1;
-    private String roomFilterText, dateFilterText, roomAText, allRoomText, tomorrowText;
+    private String roomFilterText, dateFilterText, customizeText, roomAText, allRoomText, tomorrowText;
     private int currentDay, currentMonth, currentYear;
     private int hour, minute;
-    private int roomASwitchId;
+    private int roomASwitchId, roomBSwitchId;
     private int defaultRecyclerViewSize;
 
     @Rule
@@ -49,6 +49,7 @@ public class MyInstrumentedText {
 
         roomFilterText = "Room filter";
         dateFilterText = "Date filter";
+        customizeText = "Customize";
         roomAText = "Room A";
         allRoomText = "All Room";
         tomorrowText = "Tomorrow";
@@ -61,39 +62,49 @@ public class MyInstrumentedText {
         minute = 30;
 
         roomASwitchId = R.id.room_a_switch;
+        roomBSwitchId = R.id.room_b_switch;
 
-        defaultRecyclerViewSize = 3;
+        defaultRecyclerViewSize = 0;
     }
 
     @Test
     public void addMeetingIsSuccessful(){
-        //Check if the recyclerView contains 3 element
+        //Check if the recyclerView contains 0 element
         checkRecyclerViewItemCount(defaultRecyclerViewSize);
 
         addMeetingProcess(subject1, email1, currentDay, roomASwitchId);
 
-        //Check if the recyclerView contains at least 4 element
+        //Check if the recyclerView contains at least 1 element
         checkRecyclerViewItemCount(defaultRecyclerViewSize + 1);
     }
 
     @Test
     public void deleteMeetingIsSuccessful(){
-        //Check if the recyclerView contains 3 element
+        //Check if the recyclerView contains 0 element
         checkRecyclerViewItemCount(defaultRecyclerViewSize);
 
-        //delete a meeting process
+        addMeetingProcess(subject1, email1, currentDay, roomASwitchId);
+
+        //Check if the recyclerView contains at least 1 element
+        checkRecyclerViewItemCount(defaultRecyclerViewSize + 1);
+
         deleteMeetingProcess();
 
-        //Check if the recyclerView contains 2 element
-        checkRecyclerViewItemCount(defaultRecyclerViewSize - 1);
+        //Check if the recyclerView contains 0 element
+        checkRecyclerViewItemCount(defaultRecyclerViewSize);
 
     }
 
     @Test
     public void filterMeetingListIsSuccessful(){
-        //Check if the recyclerView contains 3 element
+        //Check if the recyclerView contains 0 element
         checkRecyclerViewItemCount(defaultRecyclerViewSize);
 
+        addMeetingProcess(subject1, email1, currentDay, roomASwitchId);
+        addMeetingProcess(subject1, email1, currentDay + 1, roomBSwitchId);
+
+        //Check if the recyclerView contains 1 element
+        checkRecyclerViewItemCount(defaultRecyclerViewSize + 2);
 
         //filter with one room process (select meeting in room A)
         filterProcess(roomFilterText, roomAText);
@@ -105,14 +116,19 @@ public class MyInstrumentedText {
         //filter with allRoom/allDate process (select all meeting)
         filterProcess(roomFilterText, allRoomText);
 
-        //Check if the recyclerView contains 3 element
-        checkRecyclerViewItemCount(defaultRecyclerViewSize);
+        //Check if the recyclerView contains 2 elements added above
+        checkRecyclerViewItemCount(defaultRecyclerViewSize + 2);
 
 
         //filter with one date process (select tomorrow meeting)
         filterProcess(dateFilterText, tomorrowText);
 
-        //Check if the recyclerView contains 2 element
+        //Check if the recyclerView contains 1 element
+        checkRecyclerViewItemCount(1);
+
+        filterProcess(dateFilterText, customizeText);
+
+        //Check if the recyclerView contains 1 element
         checkRecyclerViewItemCount(1);
     }
 
@@ -159,13 +175,21 @@ public class MyInstrumentedText {
 
     private void deleteMeetingProcess(){
         //Click on the delete button of the third item (delete the third meeting)
-        onView(withId(R.id.my_recyclerview)).perform(RecyclerViewActions.actionOnItemAtPosition(2, MyViewAction.clickChildViewWithId(R.id.delete_image_button)));
+        onView(withId(R.id.my_recyclerview)).perform(RecyclerViewActions.actionOnItemAtPosition(0, MyViewAction.clickChildViewWithId(R.id.delete_image_button)));
     }
 
     private void filterProcess(String typeOfStatus, String status){
         openContextualActionModeOverflowMenu();         //Open the menu
         onView(withText(typeOfStatus)).perform(click());
         onView(withText(status)).perform(click());
+
+        if (status.equals(customizeText)){
+            //set the date with the displayed DatePicker and then click on the "ok" button to confirm
+            onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(currentYear, currentMonth, currentDay));
+            onView(withId(android.R.id.button1)).perform(click());
+        }
+
+
     }
 
 }
