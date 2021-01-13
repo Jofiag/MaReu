@@ -154,6 +154,7 @@ public class AddMeetingFragment extends Fragment {
             DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
                     (view, year, monthOfYear, dayOfMonth) -> {
                         dateTextView.setText(MessageFormat.format("{0}/{1}/{2}", dayOfMonth, monthOfYear + 1, year));
+                        dateTextView.setText(removeComa(dateTextView.getText().toString()));
                         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                         calendar.set(Calendar.MONTH, monthOfYear+1);
                         calendar.set(Calendar.YEAR, year);
@@ -210,5 +211,14 @@ public class AddMeetingFragment extends Fragment {
     private void showAllMeeting(){
         Intent intent = new Intent(getActivity(), MainActivity.class);
         startActivity(intent);
+    }
+
+    private String removeComa(String text){
+        String result = text;
+        if (text.contains(","))
+            result = text.replace(",", "");
+
+        return result;
+
     }
 }
