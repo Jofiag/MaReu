@@ -54,12 +54,13 @@
                 android:id="@+id/participants_emails_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/email_com_text"
                 android:layout_below="@+id/some_meeting_details_text"
-                android:layout_toEndOf="@+id/meeting_image_view"
                 android:layout_marginStart="11dp"
+                android:layout_toStartOf="@+id/delete_image_button"
+                android:layout_toEndOf="@+id/meeting_image_view"
+                android:ellipsize="end"
                 android:maxLines="1"
-                android:maxWidth="217dp"/>
+                tools:text="@string/email_com_text"/>
 
             <ImageButton
                 android:id="@+id/delete_image_button"
